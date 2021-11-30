@@ -10,10 +10,14 @@
           matInput
           placeholder="Please enter account"
           formControlName="account"
+          required
         />
-        <!-- <div *ngIf="account.invalid"> -->
-          <mat-error *ngIf="account.invalid">Account is required</mat-error>
-        <!-- </div> -->
+        <mat-error *ngIf="account.errors && account.errors['required']"
+          >Account is required</mat-error
+        >
+        <mat-error *ngIf="account.errors && account.errors['pattern']"
+          >must be at least 3 characters long</mat-error
+        >
       </mat-form-field>
     </div>
     <div class="form-item">
@@ -23,12 +27,30 @@
           matInput
           placeholder="Please enter password"
           formControlName="password"
+          required
+          type="password"
         />
-        <mat-error *ngIf="password.invalid">Password is required</mat-error>
+        <mat-error *ngIf="password.errors && password.errors['required']"
+          >Password is required</mat-error
+        >
+        <mat-error *ngIf="password.errors && password.errors['pattern']"
+          >must be at least 3 characters long</mat-error
+        >
       </mat-form-field>
     </div>
-    <button class="login-btn" mat-raised-button color="primary" type="submit">
-      Login
+    <button
+      class="login-btn"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="loading"
+    >
+      <div class="login-btn-inner">
+        <div *ngIf="loading" class="login-btn-inner-loading">
+          <mat-spinner [diameter]="25"></mat-spinner>
+        </div>
+        <div>Login</div>
+      </div>
     </button>
   </form>
 </div>
