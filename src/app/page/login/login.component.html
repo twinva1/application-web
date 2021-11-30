@@ -1,0 +1,34 @@
+<div class="login">
+  <div class="logo-wrapper">
+    <img src="assets/image/logo.png" />
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onLogin()">
+    <div class="form-item">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Account</mat-label>
+        <input
+          matInput
+          placeholder="Please enter account"
+          formControlName="account"
+        />
+        <!-- <div *ngIf="account.invalid"> -->
+          <mat-error *ngIf="account.invalid">Account is required</mat-error>
+        <!-- </div> -->
+      </mat-form-field>
+    </div>
+    <div class="form-item">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          placeholder="Please enter password"
+          formControlName="password"
+        />
+        <mat-error *ngIf="password.invalid">Password is required</mat-error>
+      </mat-form-field>
+    </div>
+    <button class="login-btn" mat-raised-button color="primary" type="submit">
+      Login
+    </button>
+  </form>
+</div>
