@@ -1,26 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { expenseOption, requestStatusOption } from 'app/util/constants';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { Router } from '@angular/router';
+import { ApplyDataService } from 'app/service/applyData.service';
+import {
+  expenseOption,
+  requestStatusOption,
+  RequestStatus,
+  ExpenseType,
+} from 'app/util/constants';
 
 @Component({
   selector: 'app-apply',
@@ -33,16 +20,55 @@ export class ApplyComponent implements OnInit {
   requestStatusOption = requestStatusOption;
   selectedExpense: String = 'all';
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns = [
+    'expense',
+    'status',
+    'amount',
+    'startDate',
+    'actions'
+  ];
+  dataSource = this.applyData.data.map((e) => ({
+    ...e,
+    status: RequestStatus[+e.status],
+    expense: ExpenseType[e.expense as keyof typeof ExpenseType],
+  }));
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private applyData: ApplyDataService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    const todayAddSevenDay = new Date();
+    todayAddSevenDay.setDate(todayAddSevenDay.getDate() + 7);
+    const todayMinusSevenDay = new Date();
+    todayMinusSevenDay.setDate(todayMinusSevenDay.getDate() - 7);
+
     this.form = this.formBuilder.group({
-      expense: [''],
-      startDate: [''],
-      endDate: [''],
+      expense: 'all',
+      status: 0,
+      reason: '',
+      startDate: todayMinusSevenDay,
+      endDate: todayAddSevenDay,
     });
+
+    this.handleSearch();
+  }
+
+  handleSearch() {
+    console.log(this.dataSource)
+    console.log('search', this.form.value);
+  }
+
+  handleReset(e: Event) {
+    // e.preventDefault();
+    this.form.reset({ expense: 'all', status: 0 });
+    this.handleSearch();
+  }
+
+  handleAddApply(e: Event) {
+    // e.preventDefault();
+    this.router.navigate(['/apply/add']);
   }
 }

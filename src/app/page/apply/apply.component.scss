@@ -1,3 +1,5 @@
+@import "../../../style/_mixin.scss";
+
 .apply {
   padding: 20px;
   background-color: white;
@@ -5,28 +7,33 @@
   box-shadow: 0px 0px 4px 1px #00000024;
   width: 100%;
   &-form {
-    width: 90%;
-    margin: 0 auto;
+    width: 95%;
+    margin: 20px auto 0px;
     form {
       display: flex;
       flex-wrap: wrap;
-      justify-content: flex-start;
+      // justify-content: flex-start;
       width: 100%;
       & > mat-form-field {
-        width: 30%;
-        padding: 0 10px;
+        width: 32%;
+        &:not(:nth-child(3n)) {
+          margin-right: calc(4% / 2);
+        }
       }
     }
     .form-btn-group {
       width: 100%;
-      padding: 0 20px 0px 10px;
       display: flex;
+
+      .add-btn {        
+        .mat-icon {
+          @include md-icon-size(18px);
+        }
+      }
+
       .search-btn {
         margin-left: 10px;
       }
-    }
-    .flex-spacer {
-      flex: 1;
     }
   }
   &-table {

@@ -1,0 +1,14 @@
+.apply-add {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  &-form {
+  }
+  &-control {
+    width: 100%;
+    text-align: right;
+    .confirm-btn {
+      margin-left: 10px;
+    }
+  }
+}
