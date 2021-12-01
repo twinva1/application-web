@@ -1,0 +1,39 @@
+.apply {
+  padding: 20px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 0px 4px 1px #00000024;
+  width: 100%;
+  &-form {
+    width: 90%;
+    margin: 0 auto;
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      width: 100%;
+      & > mat-form-field {
+        width: 30%;
+        padding: 0 10px;
+      }
+    }
+    .form-btn-group {
+      width: 100%;
+      padding: 0 20px 0px 10px;
+      display: flex;
+      .search-btn {
+        margin-left: 10px;
+      }
+    }
+    .flex-spacer {
+      flex: 1;
+    }
+  }
+  &-table {
+    margin-top: 20px;
+    width: 100%;
+    table {
+      width: 100%;
+    }
+  }
+}

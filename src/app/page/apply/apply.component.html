@@ -1,5 +1,98 @@
-
-
 <div class="apply">
-  <div>apply</div>
+  <section class="apply-form">
+    <form [formGroup]="form">
+      <mat-form-field appearance="fill">
+        <mat-label>Expense</mat-label>
+        <mat-select name="expense" [(value)]="selectedExpense">
+          <mat-option
+            *ngFor="let expense of expenseOption"
+            [value]="expense.value"
+          >
+            {{ expense.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Status</mat-label>
+        <mat-select name="status">
+          <mat-option
+            *ngFor="let status of requestStatusOption"
+            [value]="status.value"
+          >
+            {{ status.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Reason</mat-label>
+        <input
+          matInput
+          placeholder="Please enter reason"
+          formControlName="reason"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill" (click)="spicker.open()">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="spicker" disabled />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="spicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #spicker disabled="false"></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill" (click)="epicker.open()">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="epicker" disabled />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="epicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #epicker disabled="false"></mat-datepicker>
+      </mat-form-field>
+      <!-- <div class="flex-spacer"></div> -->
+      <div class="form-btn-group">
+        <button mat-raised-button color="primary">Add</button>
+        <div class="flex-spacer"></div>
+        <button mat-raised-button>Reset</button>
+        <button
+          class="search-btn"
+          mat-raised-button
+          color="primary"
+          type="submit"
+        >
+          Search
+        </button>
+      </div>
+    </form>
+  </section>
+  <section class="apply-table">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef>Weight</th>
+        <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef>Symbol</th>
+        <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </section>
 </div>
