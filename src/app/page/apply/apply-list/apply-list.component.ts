@@ -11,11 +11,11 @@ import {
 } from 'app/util/constants';
 
 @Component({
-  selector: 'app-apply',
-  templateUrl: './apply.component.html',
-  styleUrls: ['./apply.component.scss'],
+  selector: 'app-apply-list',
+  templateUrl: './apply-list.component.html',
+  styleUrls: ['./apply-list.component.scss'],
 })
-export class ApplyComponent implements OnInit {
+export class ApplyListComponent implements OnInit {
   userInfo = this.accountService.userInfo.getValue();
   form!: FormGroup;
   expenseOption = expenseOption;
@@ -59,7 +59,7 @@ export class ApplyComponent implements OnInit {
   getApplyData() {
     this.loading = true;
     this.applyDataService.getAllApplyData().subscribe((data) => {
-      this.loading = false
+      this.loading = false;
       this.dataSource = data.map((e) => ({
         ...e,
         status: RequestStatus[e.status],

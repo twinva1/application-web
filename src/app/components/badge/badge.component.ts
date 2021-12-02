@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-status-badge',
-  templateUrl: './status-badge.component.html',
-  styleUrls: ['./status-badge.component.scss'],
+  selector: 'app-badge',
+  templateUrl: './badge.component.html',
+  styleUrls: ['./badge.component.scss'],
 })
 export class StatusBadgeComponent implements OnInit {
   @Input() type = '';

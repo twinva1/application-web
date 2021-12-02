@@ -4,14 +4,14 @@ import { LayoutComponent } from '../../components/layout/layout.component';
 import { ApplyAddComponent } from './apply-add/apply-add.component';
 import { ApplyViewComponent } from './apply-view/apply-view.component';
 import { ApplyApproveComponent } from './apply-approve/apply-approve.component';
-import { ApplyComponent } from './apply.component';
+import { ApplyListComponent } from './apply-list/apply-list.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', component: ApplyComponent },
+      { path: '', component: ApplyListComponent },
       { path: 'add', component: ApplyAddComponent },
       { path: 'view/:id', component: ApplyViewComponent },
       { path: 'approve/:id', component: ApplyApproveComponent },
