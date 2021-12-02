@@ -10,11 +10,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./page/apply/apply.module').then((m) => m.ApplyModule),
   },
-  {
-    path: 'approve',
-    loadChildren: () =>
-      import('./page/approve/approve.module').then((m) => m.ApproveModule),
-  },
+  // {
+  //   path: 'approve',
+  //   loadChildren: () =>
+  //     import('./page/approve/approve.module').then((m) => m.ApproveModule),
+  // },
   { path: '**', redirectTo: '/login' },
 ];
 

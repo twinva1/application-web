@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
+import { NumberFormatPipe } from './pipe/number-format.pipe';
 
 @NgModule({
   exports: [
@@ -23,6 +24,8 @@ import { MatTableModule } from '@angular/material/table';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
+    NumberFormatPipe,
   ],
+  declarations: [NumberFormatPipe],
 })
-export class SharedMaterialModule {}
+export class SharedModule {}

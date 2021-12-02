@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from '../../components/layout/layout.component';
 import { ApplyAddComponent } from './apply-add/apply-add.component';
 import { ApplyViewComponent } from './apply-view/apply-view.component';
+import { ApplyApproveComponent } from './apply-approve/apply-approve.component';
 import { ApplyComponent } from './apply.component';
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
     children: [
       { path: '', component: ApplyComponent },
       { path: 'add', component: ApplyAddComponent },
-      { path: 'view', component: ApplyViewComponent },
+      { path: 'view/:id', component: ApplyViewComponent },
+      { path: 'approve/:id', component: ApplyApproveComponent },
       { path: '**', redirectTo: '' },
     ],
   },

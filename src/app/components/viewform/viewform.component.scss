@@ -1,0 +1,35 @@
+.viewform {
+  .form {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 70px auto 30px;
+    &-item {
+      width: 50%;
+      display: flex;
+      font-size: 18px;
+      margin-bottom: 40px;
+      div {
+        display: inline-block;
+      }
+      &-label {
+        width: 40%;
+        margin-right: 10px;
+        text-align: right;
+        font-weight: bold;
+      }
+      &-value {
+        flex: 1;
+      }
+    }
+  }
+
+  &-control {
+    width: 50%;
+    margin: 0px auto 10px;
+    text-align: center;
+    button:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+}

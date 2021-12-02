@@ -1,5 +1,12 @@
-<div class="apply">
-  <h2>Subsidy List</h2>
+<div class="apply inner-card mat-elevation-z3">
+  <header class="apply-header">
+    <h2>Expense List</h2>
+    <div>
+      <span>Hi, {{ userInfo?.name }}</span>
+      <button mat-raised-button (click)="handleLogout()">Logout</button>
+    </div>
+  </header>
+
   <section class="apply-form">
     <form #searchform [formGroup]="form" (ngSubmit)="handleSearch()">
       <mat-form-field appearance="outline">
@@ -54,31 +61,30 @@
         ></mat-datepicker-toggle>
         <mat-datepicker #epicker disabled="false"></mat-datepicker>
       </mat-form-field>
-      <div class="form-btn-group">
+    </form>
+    <div class="form-btn-group">
+      <ng-container *ngIf="!accountService.isAdmin">
         <button
           class="add-btn"
           mat-raised-button
-          type="button"
           color="primary"
           (click)="handleAddApply($event)"
         >
           <mat-icon>add</mat-icon>
           <span>New Apply</span>
         </button>
-        <div class="flex-spacer"></div>
-        <button mat-raised-button type="button" (click)="handleReset($event)">
-          Reset
-        </button>
-        <button
-          class="search-btn"
-          mat-raised-button
-          color="primary"
-          type="submit"
-        >
-          Search
-        </button>
-      </div>
-    </form>
+      </ng-container>
+      <div class="flex-spacer"></div>
+      <button mat-raised-button (click)="handleReset($event)">Reset</button>
+      <button
+        class="search-btn"
+        mat-raised-button
+        color="primary"
+        (click)="handleSearch()"
+      >
+        Search
+      </button>
+    </div>
   </section>
   <section class="apply-table">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
@@ -87,9 +93,9 @@
         <td mat-cell *matCellDef="let element">{{ element.position }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="expense">
+      <ng-container matColumnDef="type">
         <th mat-header-cell *matHeaderCellDef>Type</th>
-        <td mat-cell *matCellDef="let element">{{ element.expense }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.type }}</td>
       </ng-container>
 
       <ng-container matColumnDef="status">
@@ -99,7 +105,9 @@
 
       <ng-container matColumnDef="amount">
         <th mat-header-cell *matHeaderCellDef>Amount</th>
-        <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ element.amount | numberFormat }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="reason">
@@ -125,10 +133,29 @@
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element">
           <ng-container *ngIf="element.status === 'Submitted'; else viewLink">
-            <a [routerLink]="'/apply/cancel'">Cancel</a>
+            <ng-container *ngIf="accountService.isAdmin">
+              <button
+                mat-stroked-button
+                [routerLink]="'/apply/approve/' + element.id"
+              >
+                Approve
+              </button>
+            </ng-container>
+            <ng-container *ngIf="!accountService.isAdmin">
+              <button mat-stroked-button (click)="handleCancel(element.id)">
+                Cancel
+              </button>
+            </ng-container>
           </ng-container>
           <ng-template #viewLink>
-            <a [routerLink]="'/apply/view'">View</a>
+            <ng-container *ngIf="accountService.isAdmin">
+              <button
+                mat-stroked-button
+                [routerLink]="'/apply/view/' + element.id"
+              >
+                View
+              </button>
+            </ng-container>
           </ng-template>
         </td>
       </ng-container>
@@ -137,4 +164,8 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </section>
+
+  <div class="loading-mask" [class.show]="loading">
+    <mat-spinner [diameter]="50"></mat-spinner>
+  </div>
 </div>

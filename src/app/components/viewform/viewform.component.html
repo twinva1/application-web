@@ -1,0 +1,26 @@
+<div class="viewform inner-card mat-elevation-z3">
+  <h2>Expense Detail</h2>
+  <div class="form">
+    <div class="form-item" *ngFor="let formitem of formOrderArr">
+      <div class="form-item-label">{{ displayName[formitem] }} :</div>
+      <div class="form-item-value">
+        {{
+          formitem === "amount"
+            ? (dataSource[formitem] | numberFormat)
+            : dataSource[formitem]
+        }}
+      </div>
+    </div>
+  </div>
+  <div class="viewform-control">
+    <ng-container *ngIf="type === 'approve'">
+      <button mat-raised-button color="primary" (click)="handleApprove()">
+        Approve
+      </button>
+      <button mat-raised-button color="primary" (click)="handleReject()">
+        Reject
+      </button>
+    </ng-container>
+    <button mat-raised-button (click)="handleBack()">Back</button>
+  </div>
+</div>

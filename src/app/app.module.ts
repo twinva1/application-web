@@ -2,19 +2,22 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { SharedMaterialModule } from './util/share-material.module';
+import { SharedModule } from './shared/share.module';
+import { HttpClientModule } from '@angular/common/http';
 //
 import { AppComponent } from './app.component';
 import { LoginComponent } from './page/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { StatusBadgeComponent } from './components/status-badge/status-badge.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, LayoutComponent],
+  declarations: [AppComponent, LoginComponent, LayoutComponent, StatusBadgeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedMaterialModule,
+    HttpClientModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

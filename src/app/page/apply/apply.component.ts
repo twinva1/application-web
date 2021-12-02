@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AccountService } from 'app/service/account.service';
 import { ApplyDataService } from 'app/service/applyData.service';
 import {
   expenseOption,
@@ -15,31 +16,28 @@ import {
   styleUrls: ['./apply.component.scss'],
 })
 export class ApplyComponent implements OnInit {
+  userInfo = this.accountService.userInfo.getValue();
   form!: FormGroup;
   expenseOption = expenseOption;
   requestStatusOption = requestStatusOption;
   selectedExpense: String = 'all';
 
-  displayedColumns = [
-    'expense',
-    'status',
-    'amount',
-    'startDate',
-    'actions'
-  ];
-  dataSource = this.applyData.data.map((e) => ({
-    ...e,
-    status: RequestStatus[+e.status],
-    expense: ExpenseType[e.expense as keyof typeof ExpenseType],
-  }));
+  displayedColumns = ['type', 'status', 'amount', 'startDate', 'actions'];
+  dataSource: any[] = [];
+
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private applyData: ApplyDataService,
-    private router: Router
+    private applyDataService: ApplyDataService,
+    private router: Router,
+    public accountService: AccountService
   ) {}
 
   ngOnInit(): void {
+    // this.accountService.userInfo.subscribe((e) => (this.userInfo = e));
+    this.getApplyData();
+
     const todayAddSevenDay = new Date();
     todayAddSevenDay.setDate(todayAddSevenDay.getDate() + 7);
     const todayMinusSevenDay = new Date();
@@ -49,26 +47,50 @@ export class ApplyComponent implements OnInit {
       expense: 'all',
       status: 0,
       reason: '',
-      startDate: todayMinusSevenDay,
-      endDate: todayAddSevenDay,
+      startDate: '',
+      endDate: '',
+      // startDate: todayMinusSevenDay,
+      // endDate: todayAddSevenDay,
     });
 
     this.handleSearch();
   }
 
+  getApplyData() {
+    this.loading = true;
+    this.applyDataService.getAllApplyData().subscribe((data) => {
+      this.loading = false
+      this.dataSource = data.map((e) => ({
+        ...e,
+        status: RequestStatus[e.status],
+        type: ExpenseType[e.type],
+      }));
+    });
+  }
+
   handleSearch() {
-    console.log(this.dataSource)
-    console.log('search', this.form.value);
+    console.log('search param', this.form.value);
+    this.getApplyData();
   }
 
   handleReset(e: Event) {
-    // e.preventDefault();
     this.form.reset({ expense: 'all', status: 0 });
     this.handleSearch();
   }
 
   handleAddApply(e: Event) {
-    // e.preventDefault();
     this.router.navigate(['/apply/add']);
+  }
+
+  handleLogout() {
+    this.accountService.logout();
+  }
+
+  handleCancel(id: number) {
+    this.applyDataService.setApplyStatus({
+      id,
+      status: RequestStatus.Canceled,
+    });
+    this.handleSearch();
   }
 }

@@ -20,9 +20,7 @@ export class LoginComponent implements OnInit {
   ) {
     const userInfo = accountService.userInfo.getValue();
     if (userInfo) {
-      const { role } = JSON.parse(userInfo);
-      console.log('user logged in');
-      // router.navigate(role && role === 1 ? ['/apply'] : ['/approve']);
+      router.navigate(['/apply']);
     }
   }
 
@@ -44,13 +42,12 @@ export class LoginComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    
-    if (this.form.value.password === '123') {
-      this.loading = true;
-      this.accountService.login().subscribe((e) => {
-        // this.loading = false;
-        this.router.navigate(['/apply']);
-      });
-    }
+    const { account, password } = this.form.value;
+
+    this.loading = true;
+    this.accountService.login(account, password).subscribe((e) => {
+      // this.loading = false;
+      this.router.navigate(['/apply']);
+    });
   };
 }

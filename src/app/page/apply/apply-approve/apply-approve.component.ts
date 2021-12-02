@@ -4,12 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { ApplyDataService } from 'app/service/applyData.service';
 import { RequestStatus, ExpenseType } from 'app/util/constants';
 import { ApplyViewData } from 'app/util/type';
+
 @Component({
-  selector: 'app-apply-view',
-  templateUrl: './apply-view.component.html',
-  styleUrls: ['./apply-view.component.scss'],
+  selector: 'app-apply-approve',
+  templateUrl: './apply-approve.component.html',
+  styleUrls: ['./apply-approve.component.scss']
 })
-export class ApplyViewComponent implements OnInit {
+export class ApplyApproveComponent implements OnInit {
   viewData!: ApplyViewData;
 
   constructor(

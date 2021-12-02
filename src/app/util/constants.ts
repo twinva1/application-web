@@ -1,14 +1,25 @@
 export enum RequestStatus {
-  All = 0,
-  Submitted = 1,
-  Rejected = 2,
-  Approved = 3,
+  All,
+  Submitted,
+  Rejected,
+  Approved,
+  Canceled,
+}
+
+export enum ExpenseType {
+  'Traveling',
+  'Group Meal',
+}
+
+export enum UserRole {
+  NormalUser,
+  Admin,
 }
 
 export const expenseOption = [
   { viewValue: 'All', value: 'all' },
-  { viewValue: 'Traveling', value: 'traveling' },
-  { viewValue: 'Group meal', value: 'group_meal' },
+  { viewValue: 'Traveling', value: ExpenseType.Traveling },
+  { viewValue: 'Group Meal', value: ExpenseType['Group Meal'] },
 ];
 
 export const requestStatusOption = [
@@ -16,5 +27,4 @@ export const requestStatusOption = [
   { viewValue: 'Submitted', value: RequestStatus.Submitted },
   { viewValue: 'Rejected', value: RequestStatus.Rejected },
   { viewValue: 'Approved', value: RequestStatus.Approved },
-]
-
+];
