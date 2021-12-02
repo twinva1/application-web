@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApplyDataService } from 'app/service/applyData.service';
+import { ExpenseType } from 'app/util/constants';
 
 @Component({
   selector: 'app-apply-add',
@@ -9,13 +11,36 @@ import { Router } from '@angular/router';
 })
 export class ApplyAddComponent implements OnInit {
   form!: FormGroup;
-  constructor(private router: Router) {}
+  expenseTypeOption = [
+    { viewValue: 'Traveling', value: ExpenseType.Traveling },
+    { viewValue: 'Group Meal', value: ExpenseType['Group Meal'] },
+  ];
 
-  ngOnInit(): void {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private applyDataService: ApplyDataService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    const tommorrow = new Date();
+    tommorrow.setDate(tommorrow.getDate() + 1);
+    this.form = this.formBuilder.group({
+      type: 0,
+      startDate: new Date(),
+      amount: 1000,
+      endDate: tommorrow,
+      reason: 'Example expense reason ...\nExample expense reason ...\n',
+    });
+  }
 
   handleCancel() {
     this.router.navigate(['/apply']);
   }
 
-  handleApply() {}
+  handleApply() {
+    console.log('apply data:', this.form.value);
+    this.applyDataService.addApplyData(this.form.value);
+    this.router.navigate(['/apply']);
+  }
 }

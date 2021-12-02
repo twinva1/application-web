@@ -2,7 +2,23 @@
   background-color: #fff;
   border-radius: 20px;
   padding: 20px;
+  width: 100%;
   &-form {
+    margin-top: 40px;
+    form {
+      width: 100%;
+      ::ng-deep {
+        * {
+        }
+        .mat-form-field {
+          width: 50%;
+        }
+        .mat-form-field-wrapper {
+          width: 65%;
+          margin: 0 auto;
+        }
+      }
+    }
   }
   &-control {
     width: 100%;

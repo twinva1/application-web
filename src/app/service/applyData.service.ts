@@ -3,6 +3,7 @@ import { BehaviorSubject, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 //
 import { ApplyData } from 'app/util/type';
+import { RequestStatus } from 'app/util/constants';
 
 const APPLY_DATA: Array<ApplyData> = [
   {
@@ -59,42 +60,42 @@ const APPLY_DATA: Array<ApplyData> = [
     startDate: '10/15/2021',
     endDate: '2/11/2021',
   },
-  {
-    id: 7,
-    type: 0,
-    status: 1,
-    amount: 7588,
-    reason: 'Phased methodical emulation',
-    startDate: '1/5/2021',
-    endDate: '8/21/2021',
-  },
-  {
-    id: 8,
-    type: 1,
-    status: 2,
-    amount: 8115,
-    reason: 'User-centric fresh-thinking attitude',
-    startDate: '10/10/2021',
-    endDate: '2/7/2021',
-  },
-  {
-    id: 9,
-    type: 0,
-    status: 3,
-    amount: 4801,
-    reason: 'Enhanced well-modulated moratorium',
-    startDate: '10/5/2021',
-    endDate: '8/2/2021',
-  },
-  {
-    id: 10,
-    type: 1,
-    status: 4,
-    amount: 7508,
-    reason: 'Versatile stable internet solution',
-    startDate: '5/9/2021',
-    endDate: '2/10/2021',
-  },
+  // {
+  //   id: 7,
+  //   type: 0,
+  //   status: 1,
+  //   amount: 7588,
+  //   reason: 'Phased methodical emulation',
+  //   startDate: '1/5/2021',
+  //   endDate: '8/21/2021',
+  // },
+  // {
+  //   id: 8,
+  //   type: 1,
+  //   status: 2,
+  //   amount: 8115,
+  //   reason: 'User-centric fresh-thinking attitude',
+  //   startDate: '10/10/2021',
+  //   endDate: '2/7/2021',
+  // },
+  // {
+  //   id: 9,
+  //   type: 0,
+  //   status: 3,
+  //   amount: 4801,
+  //   reason: 'Enhanced well-modulated moratorium',
+  //   startDate: '10/5/2021',
+  //   endDate: '8/2/2021',
+  // },
+  // {
+  //   id: 10,
+  //   type: 1,
+  //   status: 4,
+  //   amount: 7508,
+  //   reason: 'Versatile stable internet solution',
+  //   startDate: '5/9/2021',
+  //   endDate: '2/10/2021',
+  // },
 ];
 
 @Injectable({
@@ -116,5 +117,14 @@ export class ApplyDataService {
   setApplyStatus({ id, status }: { id: number; status: number }) {
     const target = this.data.find((e) => e.id === id);
     if (target) target.status = status;
+  }
+
+  addApplyData(params: any) {
+    const newApplyData = {
+      ...params,
+      status: RequestStatus.Submitted,
+      id: this.data.length + 1,
+    };
+    this.data.push(newApplyData);
   }
 }
