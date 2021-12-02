@@ -1,8 +1,53 @@
 <div class="apply-add mat-elevation-z1">
-  <h2>New Expense Apply</h2>
+  <h2>New Expense</h2>
   <section class="apply-add-form">
     <form [formGroup]="form">
-      
+      <mat-form-field appearance="outline">
+        <mat-label>Expense Type</mat-label>
+        <mat-select name="type" formControlName="type">
+          <mat-option
+            *ngFor="let type of expenseTypeOption"
+            [value]="type.value"
+          >
+            {{ type.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="spicker" formControlName="startDate" />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="spicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #spicker disabled="false"></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input
+          matInput
+          placeholder="Please enter amount"
+          formControlName="amount"
+          type="number"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="epicker" formControlName="endDate" />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="epicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #epicker disabled="false"></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Reason</mat-label>
+        <textarea
+          matInput
+          placeholder="Please enter reason..."
+          formControlName="reason"
+        ></textarea>
+      </mat-form-field>
     </form>
   </section>
   <section class="apply-add-control">
