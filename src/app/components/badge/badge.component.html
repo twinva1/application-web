@@ -1,1 +1,11 @@
-<p>status-badge works!</p>
+<span class="badge">
+  <span [class]="['badge-dot', status]"> </span>
+  <span class="badge-text">{{ text }}</span>
+</span>
+
+<!-- <span {...restProps} className={badgeClassName} style={mergedStyle}>
+  <span className={statusCls} style={statusStyle} />
+  <span style={{ color: statusTextColor }} className={`${prefixCls}-status-text`}>
+    {text}
+  </span>
+</span> -->

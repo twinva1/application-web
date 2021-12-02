@@ -7,6 +7,7 @@ import { ApplyAddComponent } from './apply-add/apply-add.component';
 import { ApplyViewComponent } from './apply-view/apply-view.component';
 import { ViewFormComponent } from 'app/components/viewform/viewform.component';
 import { ApplyApproveComponent } from './apply-approve/apply-approve.component';
+import { BadgeComponent } from 'app/components/badge/badge.component';
 @NgModule({
   declarations: [
     ApplyListComponent,
@@ -14,6 +15,7 @@ import { ApplyApproveComponent } from './apply-approve/apply-approve.component';
     ApplyViewComponent,
     ViewFormComponent,
     ApplyApproveComponent,
+    BadgeComponent,
   ],
   imports: [CommonModule, ApplyRoutingModule, SharedModule],
 })

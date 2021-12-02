@@ -3,12 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'app/service/account.service';
 import { ApplyDataService } from 'app/service/applyData.service';
-import {
-  expenseOption,
-  requestStatusOption,
-  RequestStatus,
-  ExpenseType,
-} from 'app/util/constants';
+import { expenseOption, requestStatusOption, RequestStatus, ExpenseType, RequestBadgeStatus } from 'app/util/constants';
 
 @Component({
   selector: 'app-apply-list',
@@ -22,7 +17,7 @@ export class ApplyListComponent implements OnInit {
   requestStatusOption = requestStatusOption;
   selectedExpense: String = 'all';
 
-  displayedColumns = ['type', 'status', 'amount', 'startDate', 'actions'];
+  displayedColumns = ['id', 'type', 'status', 'amount', 'startDate', 'actions'];
   dataSource: any[] = [];
 
   loading = false;
@@ -62,7 +57,8 @@ export class ApplyListComponent implements OnInit {
       this.loading = false;
       this.dataSource = data.map((e) => ({
         ...e,
-        status: RequestStatus[e.status],
+        statusDisplayName: RequestStatus[e.status],
+        statusBadge: RequestBadgeStatus[e.status],
         type: ExpenseType[e.type],
       }));
     });

@@ -16,6 +16,13 @@ export enum UserRole {
   Admin,
 }
 
+export const RequestBadgeStatus = {
+  [RequestStatus.Submitted.toString()]: 'processing',
+  [RequestStatus.Rejected.toString()]: 'error',
+  [RequestStatus.Approved.toString()]: 'success',
+  [RequestStatus.Canceled.toString()]: 'default',
+};
+
 export const expenseOption = [
   { viewValue: 'All', value: 'all' },
   { viewValue: 'Traveling', value: ExpenseType.Traveling },

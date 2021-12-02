@@ -8,14 +8,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './page/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
-import { StatusBadgeComponent } from './components/badge/badge.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     LayoutComponent,
-    StatusBadgeComponent,
   ],
   imports: [
     BrowserModule,

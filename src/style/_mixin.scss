@@ -4,3 +4,29 @@
   width: $size;
   line-height: $size;
 }
+
+@mixin ez-animation($duration: 1s, $iteration: infinite, $function: ease-in-out, $fillmode: none, $delay: 0) {
+  $name: kf-#{unique-id()};
+  @keyframes #{$name} {
+    @content;
+  }
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-iteration-count: $iteration;
+  animation-timing-function: $function;
+  animation-fill-mode: $fillmode;
+  animation-delay: $delay;
+}
+
+// @include ez-animation(0.8s) {
+//   0% {
+//     border-color: var(--player-color);
+//     padding: 0px;
+//     margin-bottom: 0px;
+//   }
+//   100% {
+//     border-color: transparent;
+//     padding: 10px;
+//     margin-bottom: -10px;
+//   }
+// }
