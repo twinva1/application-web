@@ -8,9 +8,30 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_FORMATS } from '@angular/material/core';
+
 import { MatTableModule } from '@angular/material/table';
 import { NumberFormatPipe } from './pipe/number-format.pipe';
+
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true,
+};
+
+export const TW_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'YYYY MMM',
+    dateA11yLabel: 'YYYY-MM-DD',
+    monthYearA11yLabel: 'YYYY MMM',
+  },
+};
 
 @NgModule({
   exports: [
@@ -24,8 +45,16 @@ import { NumberFormatPipe } from './pipe/number-format.pipe';
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
+    PerfectScrollbarModule,
     NumberFormatPipe,
   ],
   declarations: [NumberFormatPipe],
+  providers: [
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
+    { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS },
+  ],
 })
 export class SharedModule {}

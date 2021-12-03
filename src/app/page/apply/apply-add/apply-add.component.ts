@@ -40,7 +40,7 @@ export class ApplyAddComponent implements OnInit {
 
   handleApply() {
     console.log('apply data:', this.form.value);
-    this.applyDataService.addApplyData(this.form.value);
+    this.applyDataService.addApplyData({...this.form.value, createDate: new Date()});
     this.router.navigate(['/apply']);
   }
 }

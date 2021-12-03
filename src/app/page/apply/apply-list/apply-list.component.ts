@@ -13,11 +13,11 @@ import { expenseOption, requestStatusOption, RequestStatus, ExpenseType, Request
 export class ApplyListComponent implements OnInit {
   userInfo = this.accountService.userInfo.getValue();
   form!: FormGroup;
-  expenseOption = expenseOption;
+  expenseTypeOption = expenseOption;
   requestStatusOption = requestStatusOption;
-  selectedExpense: String = 'all';
+  // selectedExpense: String = 'all';
 
-  displayedColumns = ['id', 'type', 'status', 'amount', 'startDate', 'actions'];
+  displayedColumns = ['id', 'type', 'status', 'amount', 'createDate', 'actions'];
   dataSource: any[] = [];
 
   loading = false;
@@ -30,8 +30,7 @@ export class ApplyListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.accountService.userInfo.subscribe((e) => (this.userInfo = e));
-    this.getApplyData();
+    // this.accountService.userInfo.subscribe((e) => (this.userInfo = e));    
 
     const todayAddSevenDay = new Date();
     todayAddSevenDay.setDate(todayAddSevenDay.getDate() + 7);
@@ -39,8 +38,8 @@ export class ApplyListComponent implements OnInit {
     todayMinusSevenDay.setDate(todayMinusSevenDay.getDate() - 7);
 
     this.form = this.formBuilder.group({
-      expense: 'all',
-      status: 0,
+      type: '',
+      status: '',
       reason: '',
       startDate: '',
       endDate: '',
@@ -53,7 +52,7 @@ export class ApplyListComponent implements OnInit {
 
   getApplyData() {
     this.loading = true;
-    this.applyDataService.getAllApplyData().subscribe((data) => {
+    this.applyDataService.getAllApplyData(this.form.value).subscribe((data) => {
       this.loading = false;
       this.dataSource = data.map((e) => ({
         ...e,
@@ -65,12 +64,12 @@ export class ApplyListComponent implements OnInit {
   }
 
   handleSearch() {
-    console.log('search param', this.form.value);
+    // console.log('search param', this.form.value);
     this.getApplyData();
   }
 
   handleReset(e: Event) {
-    this.form.reset({ expense: 'all', status: 0 });
+    this.form.reset({ type: '', status: '' });
     this.handleSearch();
   }
 

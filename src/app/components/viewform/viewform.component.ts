@@ -15,6 +15,7 @@ export class ViewFormComponent implements OnInit {
   @Input() dataSource: ApplyViewData = {
     id: 1,
     type: 'Submitted',
+    createDate: '2021-01-21',
     startDate: '2021-01-21',
     status: 'Submitted',
     endDate: '2021-01-22',
@@ -30,21 +31,12 @@ export class ViewFormComponent implements OnInit {
     endDate: 'End Date',
     amount: 'Amount',
     reason: 'Reason',
+    createDate: '',
   };
 
-  formOrderArr: (keyof ApplyViewData)[] = [
-    'type',
-    'startDate',
-    'status',
-    'endDate',
-    'amount',
-    'reason',
-  ];
+  formOrderArray: (keyof ApplyViewData)[] = ['type', 'startDate', 'status', 'endDate', 'amount', 'reason'];
 
-  constructor(
-    private route: Router,
-    private applyDataService: ApplyDataService
-  ) {}
+  constructor(private route: Router, private applyDataService: ApplyDataService) {}
 
   ngOnInit(): void {}
 

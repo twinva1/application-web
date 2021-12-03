@@ -5,18 +5,12 @@ import { SharedModule } from '../../shared/share.module';
 import { ApplyListComponent } from './apply-list/apply-list.component';
 import { ApplyAddComponent } from './apply-add/apply-add.component';
 import { ApplyViewComponent } from './apply-view/apply-view.component';
-import { ViewFormComponent } from 'app/components/viewform/viewform.component';
 import { ApplyApproveComponent } from './apply-approve/apply-approve.component';
-import { BadgeComponent } from 'app/components/badge/badge.component';
+import { CustomComponentModule } from 'app/components/custom-component.module';
+import { LayoutComponent } from './layout/layout.component';
+
 @NgModule({
-  declarations: [
-    ApplyListComponent,
-    ApplyAddComponent,
-    ApplyViewComponent,
-    ViewFormComponent,
-    ApplyApproveComponent,
-    BadgeComponent,
-  ],
-  imports: [CommonModule, ApplyRoutingModule, SharedModule],
+  declarations: [ApplyListComponent, ApplyAddComponent, ApplyViewComponent, ApplyApproveComponent, LayoutComponent],
+  imports: [CommonModule, ApplyRoutingModule, SharedModule, CustomComponentModule],
 })
 export class ApplyModule {}

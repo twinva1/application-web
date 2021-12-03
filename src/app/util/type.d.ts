@@ -10,6 +10,7 @@ export type ApplyData = {
   status: number;
   reason: string;
   amount: number;
+  createDate: string;
   startDate: string;
   endDate: string;
 };
@@ -21,6 +22,7 @@ export type ApplyViewData = {
   status: string;
   reason: string;
   amount: number;
+  createDate: string;
   startDate: string;
   endDate: string;
 };

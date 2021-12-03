@@ -1,5 +1,4 @@
 export enum RequestStatus {
-  All,
   Submitted,
   Rejected,
   Approved,
@@ -7,7 +6,7 @@ export enum RequestStatus {
 }
 
 export enum ExpenseType {
-  'Traveling',
+  Traveling,
   'Group Meal',
 }
 
@@ -24,14 +23,15 @@ export const RequestBadgeStatus = {
 };
 
 export const expenseOption = [
-  { viewValue: 'All', value: 'all' },
+  { viewValue: 'All', value: '' },
   { viewValue: 'Traveling', value: ExpenseType.Traveling },
   { viewValue: 'Group Meal', value: ExpenseType['Group Meal'] },
 ];
 
 export const requestStatusOption = [
-  { viewValue: 'All', value: RequestStatus.All },
+  { viewValue: 'All', value: '' },
   { viewValue: 'Submitted', value: RequestStatus.Submitted },
   { viewValue: 'Rejected', value: RequestStatus.Rejected },
   { viewValue: 'Approved', value: RequestStatus.Approved },
+  { viewValue: 'Canceled', value: RequestStatus.Canceled },
 ];
