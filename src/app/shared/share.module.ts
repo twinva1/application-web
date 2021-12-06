@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 //
 import { NumberFormatPipe } from './pipe/number-format.pipe';
 import { BadgeComponent } from './components/badge/badge.component';
@@ -47,6 +48,7 @@ export const TW_FORMATS = {
     MatNativeDateModule,
     MatTableModule,
     PerfectScrollbarModule,
+    MatSnackBarModule,
   ],
   exports: [
     MatButtonModule,
@@ -64,6 +66,7 @@ export const TW_FORMATS = {
     BadgeComponent,
     LoadingComponent,
     ViewFormComponent,
+    MatSnackBarModule,
   ],
   declarations: [NumberFormatPipe, BadgeComponent, LoadingComponent, ViewFormComponent],
   providers: [

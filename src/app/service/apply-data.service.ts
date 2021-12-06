@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject, of, filter, map, Observable, from } from 'rxjs';
 import { delay } from 'rxjs/operators';
 //
 import { ApplyData } from 'app/util/type';
@@ -163,55 +163,31 @@ const APPLY_DATA: Array<ApplyData> = [
   providedIn: 'root',
 })
 export class ApplyDataService {
-  data = APPLY_DATA;
+  data: ApplyData[] = [];
 
   constructor(private http: HttpClient) {}
 
-  getApplyDataById(id: number) {
-    return this.data.filter((e) => e.id === id)[0];
+  getDataById(id: number) {
+    if (this.data.length) {
+      const targetData = this.data.filter((e) => e.id === id)[0];
+      return of(targetData);
+    }    
+    return of(this.data[0]);
   }
 
-  getAllApplyData(condition: Partial<ApplyData> | null = null) {
-    // return this.http.get<any[]>('https://api.mockaroo.com/api/ac68afa0?count=10&key=9c22b440');
-    let filterData = this.data;
-    if (condition) {
-      console.log('condition', condition);
-      Object.keys(condition).forEach((e) => {
-        if (e === '') {
-          delete condition[e as keyof ApplyData];
-        }
-      });
-      filterData = this.data.filter((e) => {
-        if (typeof condition.type === 'number' && e.type !== condition.type) {
-          return false;
-        }
-        if (typeof condition.status === 'number' && e.status !== condition.status) {
-          return false;
-        }
-        if (condition.startDate && condition.endDate) {
-          const { startDate, endDate } = condition;
-          const sDate = new Date(startDate <= endDate ? startDate : endDate);
-          const eDate = new Date(startDate <= endDate ? endDate : startDate);
-          const createDate = new Date(e.createDate);
-
-          console.log('sDate', sDate);
-          console.log('createDate', createDate);
-          console.log('eDate', eDate);
-          if (createDate < sDate || createDate > eDate) return false;
-        }
-        return true;
-      });
-    }
-
-    return of(filterData).pipe(delay(500));
+  getAllData(condition: Partial<ApplyData> | null = null) {
+    return of(APPLY_DATA).pipe(delay(500), (e) => {
+      e.subscribe((e) => (this.data = e));
+      return e;
+    });
   }
 
-  setApplyStatus({ id, status }: { id: number; status: number }) {
+  setStatus({ id, status }: { id: number; status: number }) {
     const target = this.data.find((e) => e.id === id);
     if (target) target.status = status;
   }
 
-  addApplyData(params: any) {
+  addData(params: any) {
     const newApplyData = {
       ...params,
       status: RequestStatus.Submitted,

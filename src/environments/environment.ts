@@ -2,8 +2,11 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false
+export const environment: EnvType = {
+  production: false,
+  apiBaseUrl: 'http://localhost:5555',
+  expenseBaseUrl: 'http:localhost:5557',
+  userBaseUrl: 'http:localhost:5557',
 };
 
 /*

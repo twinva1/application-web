@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Component, Input, OnInit } from '@angular/core';
 //
 import { ApplyViewData } from 'app/util/type';
-import { ApplyDataService } from 'app/service/applyData.service';
+import { ApplyDataService } from 'app/service';
 import { RequestStatus } from 'app/util/constants';
 
 @Component({
@@ -41,7 +41,7 @@ export class ViewFormComponent implements OnInit {
   ngOnInit(): void {}
 
   handleApprove() {
-    this.applyDataService.setApplyStatus({
+    this.applyDataService.setStatus({
       id: this.dataSource.id,
       status: RequestStatus.Approved,
     });
@@ -49,7 +49,7 @@ export class ViewFormComponent implements OnInit {
   }
 
   handleReject() {
-    this.applyDataService.setApplyStatus({
+    this.applyDataService.setStatus({
       id: this.dataSource.id,
       status: RequestStatus.Rejected,
     });

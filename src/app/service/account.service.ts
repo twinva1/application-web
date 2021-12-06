@@ -25,18 +25,18 @@ export class AccountService {
 
   login(account: string, password: string) {
     // TODO: add login api
-    // this.http.post<LoginResponse>('')
-    const mockUser = {
+    // this.http.post<LoginResponse>('/user/login')
+    const userInfo = {
       id: 1,
       name: account,
       role_id: password === '123' ? 1 : 0,
     };
-    localStorage.setItem(this.userStorageKey, JSON.stringify(mockUser));
-    if (mockUser.role_id === UserRole.Admin) {
+    localStorage.setItem(this.userStorageKey, JSON.stringify(userInfo));
+    if (userInfo.role_id === UserRole.Admin) {
       console.log(`${account} is admin`);
       this.isAdmin = true;
     }
-    this.userInfo.next(mockUser);
+    this.userInfo.next(userInfo);
 
     return of([1]).pipe(delay(1200));
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApplyDataService } from 'app/service/applyData.service';
+import { ApplyDataService } from 'app/service';
 import { ExpenseType } from 'app/util/constants';
 
 @Component({
@@ -40,7 +40,7 @@ export class ApplyAddComponent implements OnInit {
 
   handleApply() {
     console.log('apply data:', this.form.value);
-    this.applyDataService.addApplyData({...this.form.value, createDate: new Date()});
+    this.applyDataService.addData({...this.form.value, createDate: new Date()});
     this.router.navigate(['/apply']);
   }
 }

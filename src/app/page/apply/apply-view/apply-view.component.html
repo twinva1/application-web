@@ -1,1 +1,3 @@
-<app-viewform [type]="'view'" [dataSource]="viewData"></app-viewform>
+<ng-container *ngIf="viewData">
+  <app-viewform [type]="'view'" [dataSource]="viewData"></app-viewform>
+</ng-container>
