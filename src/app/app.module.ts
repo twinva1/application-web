@@ -7,20 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 //
 import { AppComponent } from './app.component';
 import { LoginComponent } from './page/login/login.component';
+import { AuthGuard } from './util/auth.guard';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    SharedModule,
-  ],
-  providers: [],
+  declarations: [AppComponent, LoginComponent],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, HttpClientModule, SharedModule],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
