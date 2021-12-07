@@ -27,9 +27,9 @@ export class ApplyAddComponent implements OnInit {
     tommorrow.setDate(tommorrow.getDate() + 1);
     this.form = this.formBuilder.group({
       type: 0,
-      startDate: new Date(),
+      startTime: new Date(),
       amount: 1000,
-      endDate: tommorrow,
+      endTime: tommorrow,
       reason: 'Example expense reason ...\nExample expense reason ...\n',
     });
   }
@@ -40,7 +40,8 @@ export class ApplyAddComponent implements OnInit {
 
   handleApply() {
     console.log('apply data:', this.form.value);
-    this.applyDataService.addData({...this.form.value, createDate: new Date()});
-    this.router.navigate(['/apply']);
+    this.applyDataService.addData({ ...this.form.value, createTime: new Date() }).subscribe((e) => {
+      this.router.navigate(['/apply']);
+    });
   }
 }

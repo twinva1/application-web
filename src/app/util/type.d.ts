@@ -6,23 +6,25 @@ export type UserType = {
 
 export type ApplyData = {
   id: number;
+  user_id: number;
   type: number;
   status: number;
   reason: string;
   amount: number;
-  createDate: string;
-  startDate: string;
-  endDate: string;
+  createTime: string;
+  startTime: string;
+  endTime: string;
 };
 
 
 export type ApplyViewData = {
   id: number;
+  user_id: number;
   type: string;
   status: string;
   reason: string;
   amount: number;
-  createDate: string;
-  startDate: string;
-  endDate: string;
+  createTime: string;
+  startTime: string;
+  endTime: string;
 };

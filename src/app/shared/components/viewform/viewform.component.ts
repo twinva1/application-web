@@ -14,46 +14,72 @@ export class ViewFormComponent implements OnInit {
   @Input() type: 'approve' | 'view' = 'view';
   @Input() dataSource: ApplyViewData = {
     id: 1,
+    user_id: 2,
     type: 'Submitted',
-    createDate: '2021-01-21',
-    startDate: '2021-01-21',
+    createTime: '2021-01-21',
+    startTime: '2021-01-21',
     status: 'Submitted',
-    endDate: '2021-01-22',
+    endTime: '2021-01-22',
     amount: 10000,
     reason: 'For training purpose',
   };
 
   displayName = {
     id: 'ID',
+    user_id: 'User',
     type: 'Expense Type',
-    startDate: 'Start Date',
+    startTime: 'Start Date',
     status: 'Expense Status',
-    endDate: 'End Date',
+    endTime: 'End Date',
     amount: 'Amount',
     reason: 'Reason',
-    createDate: '',
+    createTime: '',
   };
 
-  formOrderArray: (keyof ApplyViewData)[] = ['type', 'startDate', 'status', 'endDate', 'amount', 'reason'];
+  formOrderArray: (keyof ApplyViewData)[] = [
+    'type',
+    'startTime',
+    'status',
+    'endTime',
+    'amount',
+    'reason',
+  ];
 
   constructor(private route: Router, private applyDataService: ApplyDataService) {}
 
   ngOnInit(): void {}
 
-  handleApprove() {
-    this.applyDataService.setStatus({
-      id: this.dataSource.id,
-      status: RequestStatus.Approved,
-    });
-    this.handleBack();
-  }
+  // handleApprove() {
+  //   this.applyDataService
+  //     .setStatus({
+  //       id: this.dataSource.id,
+  //       status: RequestStatus.Approved,
+  //     })
+  //     .subscribe(() => {
+  //       this.handleBack();
+  //     });
+  // }
 
-  handleReject() {
-    this.applyDataService.setStatus({
-      id: this.dataSource.id,
-      status: RequestStatus.Rejected,
-    });
-    this.handleBack();
+  // handleReject() {
+  //   this.applyDataService
+  //     .setStatus({
+  //       id: this.dataSource.id,
+  //       status: RequestStatus.Rejected,
+  //     })
+  //     .subscribe(() => {
+  //       this.handleBack();
+  //     });
+  // }
+
+  changeStatus(status: 'approve' | 'reject') {
+    this.applyDataService
+      .setStatus({
+        id: this.dataSource.id,
+        status: status === 'approve' ? RequestStatus.Approved : RequestStatus.Rejected,
+      })
+      .subscribe(() => {
+        this.handleBack();
+      });
   }
 
   handleBack() {

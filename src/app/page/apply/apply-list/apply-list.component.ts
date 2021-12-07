@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AccountService } from 'app/service';
-import { ApplyDataService } from 'app/service';
+import { AccountService, ApplyDataService } from 'app/service';
 import { expenseOption, requestStatusOption, RequestStatus, ExpenseType, RequestBadgeStatus } from 'app/util/constants';
 
 @Component({
@@ -17,7 +16,7 @@ export class ApplyListComponent implements OnInit {
   requestStatusOption = requestStatusOption;
   // selectedExpense: String = 'all';
 
-  displayedColumns = ['id', 'type', 'status', 'amount', 'createDate', 'actions'];
+  displayedColumns = ['id', 'type', 'status', 'amount', 'createTime', 'actions'];
   dataSource: any[] = [];
 
   loading = false;
@@ -41,10 +40,10 @@ export class ApplyListComponent implements OnInit {
       type: '',
       status: '',
       reason: '',
-      startDate: '',
-      endDate: '',
-      // startDate: todayMinusSevenDay,
-      // endDate: todayAddSevenDay,
+      startTime: '',
+      endTime: '',
+      // startTime: todayMinusSevenDay,
+      // endTime: todayAddSevenDay,
     });
 
     this.handleSearch();
@@ -52,27 +51,27 @@ export class ApplyListComponent implements OnInit {
 
   getApplyData() {
     this.loading = true;
-    this.applyDataService.getAllData().subscribe((data) => {
+    this.applyDataService.getAllData().subscribe((res) => {      
       this.loading = false;
       const condition = this.form.value;
-      let filterData = data;
+      let filterData = res.data;
       Object.keys(condition).forEach((e) => {
         if (!e && typeof e !== 'number') delete condition[e];
       });
       if (Object.keys(condition).length) {
-        filterData = data.filter((e) => {
+        filterData = res.data.filter((e) => {
           if (typeof condition.type === 'number' && e.type !== condition.type) {
             return false;
           }
           if (typeof condition.status === 'number' && e.status !== condition.status) {
             return false;
           }
-          if (condition.startDate && condition.endDate) {
-            const { startDate, endDate } = condition;
-            const sDate = new Date(startDate <= endDate ? startDate : endDate);
-            const eDate = new Date(startDate <= endDate ? endDate : startDate);
-            const createDate = new Date(e.createDate);
-            if (createDate < sDate || createDate > eDate) return false;
+          if (condition.startTime && condition.endTime) {
+            const { startTime, endTime } = condition;
+            const sDate = new Date(startTime <= endTime ? startTime : endTime);
+            const eDate = new Date(startTime <= endTime ? endTime : startTime);
+            const createTime = new Date(e.createTime);
+            if (createTime < sDate || createTime > eDate) return false;
           }
           return true;
         });

@@ -17,7 +17,7 @@
         <div class="form-item-label">Start Date : </div>
         <mat-form-field appearance="outline">
           <!-- <mat-label>Start Date</mat-label> -->
-          <input matInput [matDatepicker]="spicker" formControlName="startDate" />
+          <input matInput [matDatepicker]="spicker" formControlName="startTime" />
           <mat-datepicker-toggle matSuffix [for]="spicker"></mat-datepicker-toggle>
           <mat-datepicker #spicker disabled="false"></mat-datepicker>
         </mat-form-field>
@@ -33,7 +33,7 @@
         <div class="form-item-label">End Date : </div>
         <mat-form-field appearance="outline">
           <!-- <mat-label>End Date</mat-label> -->
-          <input matInput [matDatepicker]="epicker" formControlName="endDate" />
+          <input matInput [matDatepicker]="epicker" formControlName="endTime" />
           <mat-datepicker-toggle matSuffix [for]="epicker"></mat-datepicker-toggle>
           <mat-datepicker #epicker disabled="false"></mat-datepicker>
         </mat-form-field>

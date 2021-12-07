@@ -43,10 +43,9 @@ export class AppResponseInteceptor implements HttpInterceptor {
         }
       }),
       catchError((e) => {
-        console.log('error:', e);
-        throwError(e);
-        this.snackBar.open(`${e.name} : ${e.statusText}`, 'Close', { duration: 3000 });
-        return of(e);
+        console.log('error:', e);        
+        this.snackBar.open(`${e.name} : ${e.statusText}`, 'Close');
+        return throwError(e);
       })
     );
   }
