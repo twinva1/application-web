@@ -13,11 +13,14 @@ import {
   RequestBadgeStatus,
 } from 'app/util/constants';
 import { ApplyData } from 'app/util/type';
+import { fadeInAnimation } from 'app/util/animation';
 
 @Component({
   selector: 'app-apply-list',
   templateUrl: './apply-list.component.html',
   styleUrls: ['./apply-list.component.scss'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class ApplyListComponent implements OnInit, AfterViewInit {
   userInfo = this.accountService.userInfo.getValue();
@@ -138,6 +141,6 @@ export class ApplyListComponent implements OnInit, AfterViewInit {
   onPageChange(pageEvent: PageEvent) {
     // TODO: integrate with backend pagination parameters
     // console.log(pageEvent);
-    console.log(this.paginator)
+    console.log(this.paginator);
   }
 }

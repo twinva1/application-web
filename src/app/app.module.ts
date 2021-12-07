@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './page/login/login.component';
 import { AuthGuard } from './util/auth.guard';
 import { AppRequestInteceptor, AppResponseInteceptor } from 'app/util/http-interceptor';
+import { FakeBackendInteceptor } from './util/fack-backend';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -23,6 +24,7 @@ import { AppRequestInteceptor, AppResponseInteceptor } from 'app/util/http-inter
     AuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AppRequestInteceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AppResponseInteceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInteceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

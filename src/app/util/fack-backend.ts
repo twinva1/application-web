@@ -1,9 +1,11 @@
-import { HttpInterceptor } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
-// @Injectable()
-// export class FakeBackendInteceptor implements HttpInterceptor {
-//   constructor() {}
-//   public intercept () {
-//   }
-// }
+@Injectable()
+export class FakeBackendInteceptor implements HttpInterceptor {
+  constructor() {}
+  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req);
+  }
+}
