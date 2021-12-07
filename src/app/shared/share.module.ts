@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import {
   MatSnackBarModule,
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
@@ -53,6 +54,7 @@ export const TW_FORMATS = {
     MatTableModule,
     PerfectScrollbarModule,
     MatSnackBarModule,
+    MatPaginatorModule,
   ],
   exports: [
     MatButtonModule,
@@ -71,6 +73,7 @@ export const TW_FORMATS = {
     LoadingComponent,
     ViewFormComponent,
     MatSnackBarModule,
+    MatPaginatorModule,
   ],
   declarations: [NumberFormatPipe, BadgeComponent, LoadingComponent, ViewFormComponent],
   providers: [

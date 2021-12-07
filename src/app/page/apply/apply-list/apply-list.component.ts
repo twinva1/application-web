@@ -1,23 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
+//
 import { AccountService, ApplyDataService } from 'app/service';
-import { expenseOption, requestStatusOption, RequestStatus, ExpenseType, RequestBadgeStatus } from 'app/util/constants';
+import {
+  expenseOption,
+  requestStatusOption,
+  RequestStatus,
+  ExpenseType,
+  RequestBadgeStatus,
+} from 'app/util/constants';
+import { ApplyData } from 'app/util/type';
 
 @Component({
   selector: 'app-apply-list',
   templateUrl: './apply-list.component.html',
   styleUrls: ['./apply-list.component.scss'],
 })
-export class ApplyListComponent implements OnInit {
+export class ApplyListComponent implements OnInit, AfterViewInit {
   userInfo = this.accountService.userInfo.getValue();
   form!: FormGroup;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  defaultPaginationConf = {
+    index: 0,
+    size: 10,
+  };
   expenseTypeOption = expenseOption;
   requestStatusOption = requestStatusOption;
-  // selectedExpense: String = 'all';
-
   displayedColumns = ['id', 'type', 'status', 'amount', 'createTime', 'actions'];
-  dataSource: any[] = [];
+  dataSource = new MatTableDataSource<Partial<ApplyData> & { [key: string]: any }>([]);
 
   loading = false;
 
@@ -49,9 +62,13 @@ export class ApplyListComponent implements OnInit {
     this.handleSearch();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   getApplyData() {
     this.loading = true;
-    this.applyDataService.getAllData().subscribe((res) => {      
+    this.applyDataService.getAllData().subscribe((res) => {
       this.loading = false;
       const condition = this.form.value;
       let filterData = res.data;
@@ -77,12 +94,15 @@ export class ApplyListComponent implements OnInit {
         });
       }
 
-      this.dataSource = filterData.map((e) => ({
-        ...e,
-        statusDisplayName: RequestStatus[e.status],
-        statusBadge: RequestBadgeStatus[e.status],
-        type: ExpenseType[e.type],
-      }));
+      this.dataSource = new MatTableDataSource<{ [key: string]: any }>(
+        filterData.map((e) => ({
+          ...e,
+          statusDisplayName: RequestStatus[e.status],
+          statusBadge: RequestBadgeStatus[e.status],
+          type: ExpenseType[e.type],
+        }))
+      );
+      this.dataSource.paginator = this.paginator;
     });
   }
 
@@ -105,10 +125,19 @@ export class ApplyListComponent implements OnInit {
   }
 
   handleCancel(id: number) {
-    this.applyDataService.setStatus({
-      id,
-      status: RequestStatus.Canceled,
-    });
-    this.handleSearch();
+    this.applyDataService
+      .setStatus({
+        id,
+        status: RequestStatus.Canceled,
+      })
+      .subscribe(() => {
+        this.handleSearch();
+      });
+  }
+
+  onPageChange(pageEvent: PageEvent) {
+    // TODO: integrate with backend pagination parameters
+    // console.log(pageEvent);
+    console.log(this.paginator)
   }
 }

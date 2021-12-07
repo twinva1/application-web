@@ -26,7 +26,7 @@ export class ApplyAddComponent implements OnInit {
     const tommorrow = new Date();
     tommorrow.setDate(tommorrow.getDate() + 1);
     this.form = this.formBuilder.group({
-      type: 0,
+      type: ExpenseType.Traveling,
       startTime: new Date(),
       amount: 1000,
       endTime: tommorrow,

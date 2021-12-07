@@ -6,7 +6,7 @@ export type UserType = {
 
 export type ApplyData = {
   id: number;
-  user_id: number;
+  userId: number;
   type: number;
   status: number;
   reason: string;
@@ -19,7 +19,7 @@ export type ApplyData = {
 
 export type ApplyViewData = {
   id: number;
-  user_id: number;
+  userId: number;
   type: string;
   status: string;
   reason: string;

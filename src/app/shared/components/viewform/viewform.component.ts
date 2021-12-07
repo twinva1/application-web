@@ -14,7 +14,7 @@ export class ViewFormComponent implements OnInit {
   @Input() type: 'approve' | 'view' = 'view';
   @Input() dataSource: ApplyViewData = {
     id: 1,
-    user_id: 2,
+    userId: 2,
     type: 'Submitted',
     createTime: '2021-01-21',
     startTime: '2021-01-21',
@@ -26,7 +26,7 @@ export class ViewFormComponent implements OnInit {
 
   displayName = {
     id: 'ID',
-    user_id: 'User',
+    userId: 'User',
     type: 'Expense Type',
     startTime: 'Start Date',
     status: 'Expense Status',
