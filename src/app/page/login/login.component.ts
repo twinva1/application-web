@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AccountService } from '../../service/account.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+//
+import { AccountService } from 'app/service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private snackBar: MatSnackBar
   ) {
     const userInfo = accountService.userInfo.getValue();
     if (userInfo) {
@@ -46,8 +49,12 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
     this.accountService.login(account, password).subscribe((e) => {
-      // this.loading = false;
-      this.router.navigate(['/apply']);
+      if (e.data) {
+        this.router.navigate(['/apply']);
+      } else {
+        // this.snackBar.open('Oops! Please try again.', 'Close');
+        this.loading = false;
+      }
     });
   };
 }

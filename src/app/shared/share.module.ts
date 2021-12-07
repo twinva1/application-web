@@ -12,7 +12,11 @@ import { MatTableModule } from '@angular/material/table';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS_FACTORY,
+} from '@angular/material/snack-bar';
 //
 import { NumberFormatPipe } from './pipe/number-format.pipe';
 import { BadgeComponent } from './components/badge/badge.component';
@@ -75,6 +79,10 @@ export const TW_FORMATS = {
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
     { provide: MAT_DATE_FORMATS, useValue: TW_FORMATS },
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: { duration: 3000, verticalPosition: 'top' },
+    },
   ],
 })
 export class SharedModule {}
