@@ -1,18 +1,18 @@
 export enum RequestStatus {
-  Submitted,
-  Rejected,
-  Approved,
-  Canceled,
+  Submitted = 1,
+  Rejected = 2,
+  Approved = 3,
+  Canceled = 4,
 }
 
 export enum ExpenseType {
-  Traveling,
-  'Group Meal',
+  Traveling = 5,
+  'Group Meal' = 6,
 }
 
 export enum UserRole {
-  NormalUser,
-  Admin,
+  Admin = 1,
+  NormalUser = 2,
 }
 
 export const RequestBadgeStatus = {
