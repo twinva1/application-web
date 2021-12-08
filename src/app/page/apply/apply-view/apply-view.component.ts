@@ -12,17 +12,21 @@ import { ApplyViewData } from 'app/util/type';
 export class ApplyViewComponent implements OnInit {
   viewData!: ApplyViewData;
 
+  loading = false
+
   constructor(private activeRoute: ActivatedRoute, private applyDataService: ApplyDataService) {}
 
   ngOnInit(): void {
     const id = this.activeRoute.snapshot.paramMap.get('id');
     if (!id) return;
+    this.loading = true;
     this.applyDataService.getDataById(+id).subscribe((data) => {
       this.viewData = {
         ...data,
         type: ExpenseType[data.type],
         status: RequestStatus[data.status],
       };
+      this.loading = false;
     });
   }
 }

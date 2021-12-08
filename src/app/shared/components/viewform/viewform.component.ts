@@ -45,6 +45,8 @@ export class ViewFormComponent implements OnInit {
     'reason',
   ];
 
+  loading = false;
+
   constructor(private route: Router, private applyDataService: ApplyDataService) {}
 
   ngOnInit(): void {}
@@ -72,12 +74,14 @@ export class ViewFormComponent implements OnInit {
   // }
 
   changeStatus(status: 'approve' | 'reject') {
+    this.loading = true;
     this.applyDataService
       .setStatus({
         id: this.dataSource.id,
         status: status === 'approve' ? RequestStatus.Approved : RequestStatus.Rejected,
       })
       .subscribe(() => {
+        this.loading = false;
         this.handleBack();
       });
   }

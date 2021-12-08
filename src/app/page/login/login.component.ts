@@ -51,13 +51,18 @@ export class LoginComponent implements OnInit {
     const { account, password } = this.form.value;
 
     this.loading = true;
-    this.accountService.login(account, password).subscribe((e) => {
-      if (e.data) {
-        this.router.navigate(['/apply']);
-      } else {
-        // this.snackBar.open('Oops! Please try again.', 'Close');
+    this.accountService.login(account, password).subscribe(
+      (e) => {
+        if (e.data) {
+          this.router.navigate(['/apply']);
+        } else {
+          // this.snackBar.open('Oops! Please try again.', 'Close');
+          this.loading = false;
+        }
+      },
+      () => {
         this.loading = false;
       }
-    });
+    );
   };
 }

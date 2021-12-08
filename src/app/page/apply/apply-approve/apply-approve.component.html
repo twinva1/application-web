@@ -1,3 +1,6 @@
-<ng-container *ngIf="viewData">
-  <app-viewform [type]="'approve'" [dataSource]="viewData"></app-viewform>
-</ng-container>
+<div>
+  <ng-container *ngIf="viewData">
+    <app-viewform [type]="'approve'" [dataSource]="viewData"></app-viewform>
+  </ng-container>
+  <app-loading [visible]="loading"></app-loading>
+</div>

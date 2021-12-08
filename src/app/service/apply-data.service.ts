@@ -143,6 +143,7 @@ const APPLY_DATA: Array<ApplyData> = [
     endTime: '2021-10-27',
   },
 ];
+
 @Injectable({
   providedIn: 'root',
 })
@@ -156,7 +157,7 @@ export class ApplyDataService {
       const targetData = this.data.filter((e) => e.id === id)[0];
       return of(targetData);
     }
-    return this.http.get<ApplyDataResponse>(`/expense/api/apply/${id}`).pipe(map((e) => e.data[0]));
+    return this.http.get<ApiResponse<ApplyData>>(`/expense/apply/${id}`).pipe(map((e) => e.data));
     // return of(this.data[0]);
   }
 
@@ -168,7 +169,8 @@ export class ApplyDataService {
         } else {
           this.data = e.data;
         }
-      })
+      }),
+      delay(400)
     );
     // return of({ code: 200, msg: '', data: APPLY_DATA }).pipe(
     //   delay(300),
