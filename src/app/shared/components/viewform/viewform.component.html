@@ -1,7 +1,7 @@
 <div class="viewform inner-card mat-elevation-z3">
   <h2>Expense Detail</h2>
   <div class="form">
-    <div class="form-item" *ngFor="let formitem of formOrderArray">
+    <div class="form-item" *ngFor="let formitem of orderArray">
       <div class="form-item-label">{{ displayName[formitem] }} :</div>
       <div class="form-item-value">
         {{
@@ -13,14 +13,14 @@
     </div>
   </div>
   <div class="viewform-control">
-    <ng-container *ngIf="type === 'approve'">
+    <div *ngIf="type === 'approve'">
       <button mat-raised-button color="primary" (click)="changeStatus('approve')">
         Approve
       </button>
       <button mat-raised-button color="primary" (click)="changeStatus('reject')">
         Reject
       </button>
-    </ng-container>
+    </div>
     <button mat-raised-button (click)="handleBack()">Back</button>
   </div>
   <app-loading [visible]="loading"></app-loading>

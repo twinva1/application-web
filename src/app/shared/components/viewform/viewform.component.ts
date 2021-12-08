@@ -12,7 +12,7 @@ import { RequestStatus } from 'app/util/constants';
 })
 export class ViewFormComponent implements OnInit {
   @Input() type: 'approve' | 'view' = 'view';
-  @Input() dataSource: ApplyViewData = {
+  @Input() dataSource: ApplyViewData & { [key: string]: any } = {
     id: 1,
     userId: 2,
     type: 'Submitted',
@@ -24,7 +24,7 @@ export class ViewFormComponent implements OnInit {
     reason: 'For training purpose',
   };
 
-  displayName = {
+  displayName: { [key: string]: string } = {
     id: 'ID',
     userId: 'User',
     type: 'Expense Type',
@@ -36,7 +36,7 @@ export class ViewFormComponent implements OnInit {
     createTime: '',
   };
 
-  formOrderArray: (keyof ApplyViewData)[] = [
+  public orderArray: (keyof ApplyViewData)[] = [
     'type',
     'startTime',
     'status',

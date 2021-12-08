@@ -88,4 +88,5 @@ export const TW_FORMATS = {
     },
   ],
 })
+
 export class SharedModule {}
