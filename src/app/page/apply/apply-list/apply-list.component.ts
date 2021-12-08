@@ -13,14 +13,11 @@ import {
   RequestBadgeStatus,
 } from 'app/util/constants';
 import { ApplyData } from 'app/util/type';
-import { fadeInAnimation } from 'app/util/animation';
 
 @Component({
   selector: 'app-apply-list',
   templateUrl: './apply-list.component.html',
   styleUrls: ['./apply-list.component.scss'],
-  animations: [fadeInAnimation],
-  host: { '[@fadeInAnimation]': '' }
 })
 export class ApplyListComponent implements OnInit, AfterViewInit {
   userInfo = this.accountService.userInfo.getValue();
@@ -75,11 +72,14 @@ export class ApplyListComponent implements OnInit, AfterViewInit {
       this.loading = false;
       const condition = this.form.value;
       let filterData = res.data;
+      if(typeof res.data === 'string') {
+        filterData = JSON.parse(res.data);
+      }
       Object.keys(condition).forEach((e) => {
         if (!e && typeof e !== 'number') delete condition[e];
       });
       if (Object.keys(condition).length) {
-        filterData = res.data.filter((e) => {
+        filterData = filterData.filter((e) => {
           if (typeof condition.type === 'number' && e.type !== condition.type) {
             return false;
           }

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//
 import { ApplyRoutingModule } from './apply-routing.module';
 import { SharedModule } from '../../shared/share.module';
 import { ApplyListComponent } from './apply-list/apply-list.component';
@@ -9,7 +11,13 @@ import { ApplyApproveComponent } from './apply-approve/apply-approve.component';
 import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
-  declarations: [ApplyListComponent, ApplyAddComponent, ApplyViewComponent, ApplyApproveComponent, LayoutComponent],
+  declarations: [
+    ApplyListComponent,
+    ApplyAddComponent,
+    ApplyViewComponent,
+    ApplyApproveComponent,
+    LayoutComponent,
+  ],
   imports: [CommonModule, ApplyRoutingModule, SharedModule],
 })
 export class ApplyModule {}

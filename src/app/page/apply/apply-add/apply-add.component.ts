@@ -45,7 +45,7 @@ export class ApplyAddComponent implements OnInit {
         ...this.form.value,
         startTime: new Date(this.form.value.startTime).toISOString(),
         endTime: new Date(this.form.value.endTime).toISOString(),
-        createTime: new Date(),
+        // createTime: new Date(),
       })
       .subscribe((e) => {
         this.router.navigate(['/apply']);
