@@ -16,6 +16,8 @@ export class ApplyAddComponent implements OnInit {
     { viewValue: 'Group Meal', value: ExpenseType['Group Meal'] },
   ];
 
+  loading = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private applyDataService: ApplyDataService,
@@ -40,6 +42,7 @@ export class ApplyAddComponent implements OnInit {
 
   handleApply() {
     console.log('apply data:', this.form.value);
+    this.loading = true
     this.applyDataService
       .addData({
         ...this.form.value,

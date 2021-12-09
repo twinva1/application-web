@@ -4,8 +4,7 @@
 
 export const environment: EnvType = {
   production: false,
-  name: 'development',
-  apiBaseUrl: 'http://localhost:5555',
+  name: 'development',  
   expenseBaseUrl: 'http://localhost:5555',
   userBaseUrl: 'http://localhost:5557',
 };

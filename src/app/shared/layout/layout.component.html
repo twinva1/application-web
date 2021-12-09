@@ -1,0 +1,27 @@
+<div class="layout">
+  <mat-toolbar class="layout-header" color="primary">
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>MALBEK</span>
+    <div class="flex-spacer"></div>
+    <span class="layout-header-username">{{ userInfo?.name }}</span>
+    <mat-icon>person</mat-icon>
+    <button style="margin-left: 10px" mat-raised-button (click)="handleLogout()" color="primary">
+      Logout
+    </button>
+  </mat-toolbar>
+  <mat-drawer-container class="layout-container">
+    <mat-drawer
+      #drawer
+      class="layout-sidebar"
+      [mode]="isSmallDevice ? 'over' : 'side'"
+      [(opened)]="drawerOpened"
+    >
+      <span>TODO: Menu Here</span>
+    </mat-drawer>
+    <div class="layout-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-container>
+</div>

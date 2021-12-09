@@ -23,9 +23,10 @@ export class AppRequestInteceptor implements HttpInterceptor {
       req = req.clone({ url: `${environment.expenseBaseUrl}${req.url.replace('/expense/', '/')}` });
     } else if (req.url.startsWith('/user/')) {
       req = req.clone({ url: `${environment.userBaseUrl}${req.url.replace('/user/', '/')}` });
-    } else if (req.url.startsWith('/')) {
-      req = req.clone({ url: `${environment.apiBaseUrl}${req.url}` });
-    }
+    } 
+    // else if (req.url.startsWith('/')) {
+    //   req = req.clone({ url: `${environment.apiBaseUrl}${req.url}` });
+    // }
     return next.handle(req).pipe(tap((res) => console.log(`[INTERCEPT][${ts}]`, res)));
   }
 }

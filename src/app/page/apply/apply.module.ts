@@ -8,7 +8,7 @@ import { ApplyListComponent } from './apply-list/apply-list.component';
 import { ApplyAddComponent } from './apply-add/apply-add.component';
 import { ApplyViewComponent } from './apply-view/apply-view.component';
 import { ApplyApproveComponent } from './apply-approve/apply-approve.component';
-import { LayoutComponent } from './layout/layout.component';
+import { ApplyLayoutComponent } from './apply-layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { LayoutComponent } from './layout/layout.component';
     ApplyAddComponent,
     ApplyViewComponent,
     ApplyApproveComponent,
-    LayoutComponent,
+    ApplyLayoutComponent,
   ],
   imports: [CommonModule, ApplyRoutingModule, SharedModule],
 })

@@ -19,8 +19,7 @@ import { ApplyData } from 'app/util/type';
   templateUrl: './apply-list.component.html',
   styleUrls: ['./apply-list.component.scss'],
 })
-export class ApplyListComponent implements OnInit, AfterViewInit {
-  userInfo = this.accountService.userInfo.getValue();
+export class ApplyListComponent implements OnInit, AfterViewInit { 
   form!: FormGroup;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   defaultPaginationConf = {
@@ -38,12 +37,10 @@ export class ApplyListComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private applyDataService: ApplyDataService,
     private router: Router,
-    public accountService: AccountService
+    public accountService: AccountService,
   ) {}
 
-  ngOnInit(): void {
-    // this.accountService.userInfo.subscribe((e) => (this.userInfo = e));
-
+  ngOnInit(): void {    
     const todayAddSevenDay = new Date();
     todayAddSevenDay.setDate(todayAddSevenDay.getDate() + 7);
     const todayMinusSevenDay = new Date();
@@ -121,10 +118,6 @@ export class ApplyListComponent implements OnInit, AfterViewInit {
 
   handleAddApply(e: Event) {
     this.router.navigate(['/apply/add']);
-  }
-
-  handleLogout() {
-    this.accountService.logout();
   }
 
   handleCancel(id: number) {

@@ -2,7 +2,7 @@
 
 .apply {
   position: relative;
-  min-height: 75vh;
+  min-height: calc(100% - 40px);
   &-header {
     display: flex;
     justify-content: space-between;

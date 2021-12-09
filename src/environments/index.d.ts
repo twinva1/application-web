@@ -1,7 +1,6 @@
 type EnvType = {
   production: boolean;
-  name: string;
-  apiBaseUrl: string;
+  name: string;  
   expenseBaseUrl: string;
   userBaseUrl: string;
   fakeBackend?: boolean;

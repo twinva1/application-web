@@ -9,20 +9,24 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import {
   MatSnackBarModule,
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MAT_SNACK_BAR_DEFAULT_OPTIONS_FACTORY,
 } from '@angular/material/snack-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { RouterModule } from '@angular/router';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 //
 import { NumberFormatPipe } from './pipe/number-format.pipe';
 import { BadgeComponent } from './components/badge/badge.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ViewFormComponent } from './components/viewform/viewform.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -40,42 +44,34 @@ export const TW_FORMATS = {
   },
 };
 
+const MODULES = [
+  MatButtonModule,
+  MatProgressSpinnerModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatTableModule,
+  MatSnackBarModule,
+  MatPaginatorModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  PerfectScrollbarModule,
+  ReactiveFormsModule,
+  RouterModule,
+];
 @NgModule({
-  imports: [
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatInputModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatTableModule,
-    PerfectScrollbarModule,
-    MatSnackBarModule,
-    MatPaginatorModule,
-  ],
-  exports: [
-    MatButtonModule,
-    MatProgressSpinnerModule,
-    MatInputModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatTableModule,
-    PerfectScrollbarModule,
+  imports: [...MODULES],
+  exports: [...MODULES, NumberFormatPipe, BadgeComponent, LoadingComponent, ViewFormComponent],
+  declarations: [
     NumberFormatPipe,
     BadgeComponent,
     LoadingComponent,
     ViewFormComponent,
-    MatSnackBarModule,
-    MatPaginatorModule,
+    LayoutComponent,
   ],
-  declarations: [NumberFormatPipe, BadgeComponent, LoadingComponent, ViewFormComponent],
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
@@ -88,5 +84,4 @@ export const TW_FORMATS = {
     },
   ],
 })
-
 export class SharedModule {}

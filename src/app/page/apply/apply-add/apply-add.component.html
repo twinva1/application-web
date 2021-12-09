@@ -3,7 +3,7 @@
   <section class="apply-add-form">
     <form [formGroup]="form">
       <div class="form-item">
-        <div class="form-item-label">Expense Type : </div>
+        <div class="form-item-label">Expense Type :</div>
         <mat-form-field appearance="outline">
           <!-- <mat-label>Expense Type</mat-label> -->
           <mat-select name="type" formControlName="type">
@@ -14,7 +14,7 @@
         </mat-form-field>
       </div>
       <div class="form-item">
-        <div class="form-item-label">Start Date : </div>
+        <div class="form-item-label">Start Date :</div>
         <mat-form-field appearance="outline">
           <!-- <mat-label>Start Date</mat-label> -->
           <input matInput [matDatepicker]="spicker" formControlName="startTime" />
@@ -23,14 +23,19 @@
         </mat-form-field>
       </div>
       <div class="form-item">
-        <div class="form-item-label">Amount : </div>
+        <div class="form-item-label">Amount :</div>
         <mat-form-field appearance="outline">
           <!-- <mat-label>Amount</mat-label> -->
-          <input matInput placeholder="Please enter amount" formControlName="amount" type="number" />
+          <input
+            matInput
+            placeholder="Please enter amount"
+            formControlName="amount"
+            type="number"
+          />
         </mat-form-field>
       </div>
       <div class="form-item">
-        <div class="form-item-label">End Date : </div>
+        <div class="form-item-label">End Date :</div>
         <mat-form-field appearance="outline">
           <!-- <mat-label>End Date</mat-label> -->
           <input matInput [matDatepicker]="epicker" formControlName="endTime" />
@@ -39,16 +44,23 @@
         </mat-form-field>
       </div>
       <div class="form-item">
-        <div class="form-item-label">Reason : </div>
+        <div class="form-item-label">Reason :</div>
         <mat-form-field appearance="outline">
           <!-- <mat-label>Reason</mat-label> -->
-          <textarea matInput placeholder="Please enter reason..." formControlName="reason"></textarea>
+          <textarea
+            matInput
+            placeholder="Please enter reason..."
+            formControlName="reason"
+          ></textarea>
         </mat-form-field>
       </div>
     </form>
   </section>
   <section class="apply-add-control">
     <button mat-raised-button (click)="handleCancel()">Cancel</button>
-    <button class="confirm-btn" mat-raised-button color="primary" (click)="handleApply()">Apply</button>
+    <button class="confirm-btn" mat-raised-button color="primary" (click)="handleApply()">
+      Apply
+    </button>
   </section>
+  <app-loading [visible]="loading"></app-loading>
 </div>

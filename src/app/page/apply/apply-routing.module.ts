@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from './layout/layout.component';
+// import { ApplyLayoutComponent } from './apply-layout/layout.component';
 import { ApplyAddComponent } from './apply-add/apply-add.component';
 import { ApplyViewComponent } from './apply-view/apply-view.component';
 import { ApplyApproveComponent } from './apply-approve/apply-approve.component';
@@ -9,7 +9,7 @@ import { ApplyListComponent } from './apply-list/apply-list.component';
 const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
+    // component: ApplyLayoutComponent,
     children: [
       { path: '', component: ApplyListComponent },
       { path: 'add', component: ApplyAddComponent },
