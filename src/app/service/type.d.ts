@@ -13,9 +13,17 @@ export type LoginResponse = ApiResponse<{
   role_id: number;
 }>;
 
-export type ApplyDataResponse = ApiResponse<ApplyData[]>;
-// {
-//   totalElements: number;
-//   totalPages: number;
-//   expenses: ApplyData[];
-// }
+export type ApplyDataResponse = ApiResponse<{
+  totalElements: number;
+  totalPages: number;
+  expenses: ApplyData[];
+}>;
+
+export type ApplyDataQueryCondition = {
+  type: number;
+  status: number;
+  startTime: number;
+  endTime: number;
+  page: number;
+  pageSize: number;
+};

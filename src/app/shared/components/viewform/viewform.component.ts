@@ -51,28 +51,6 @@ export class ViewFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // handleApprove() {
-  //   this.applyDataService
-  //     .setStatus({
-  //       id: this.dataSource.id,
-  //       status: RequestStatus.Approved,
-  //     })
-  //     .subscribe(() => {
-  //       this.handleBack();
-  //     });
-  // }
-
-  // handleReject() {
-  //   this.applyDataService
-  //     .setStatus({
-  //       id: this.dataSource.id,
-  //       status: RequestStatus.Rejected,
-  //     })
-  //     .subscribe(() => {
-  //       this.handleBack();
-  //     });
-  // }
-
   changeStatus(status: 'approve' | 'reject') {
     this.loading = true;
     this.applyDataService

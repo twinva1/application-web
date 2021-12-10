@@ -16,6 +16,11 @@ export type ApplyData = {
   endTime: string;
 };
 
+export type ApplyTableData = Omit<ApplyData, 'type'> & {
+  statusBadge: string;
+  statusDisplayName: string;
+  type: string;
+};
 
 export type ApplyViewData = {
   id: number;

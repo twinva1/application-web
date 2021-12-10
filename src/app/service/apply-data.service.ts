@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ApplyData } from 'app/util/type';
 import { RequestStatus } from 'app/util/constants';
 import { AccountService } from 'app/service';
-import { ApiResponse, ApplyDataResponse } from './type';
+import { ApiResponse, ApplyDataResponse, ApplyDataQueryCondition } from './type';
 
 const APPLY_DATA: Array<ApplyData> = [
   {
@@ -161,12 +161,12 @@ export class ApplyDataService {
     // return of(this.data[0]);
   }
 
-  getAllData(condition: Partial<ApplyData> | null = null) {
-    return this.http.get<ApplyDataResponse>('/expense/apply').pipe(
-      tap((e) => {        
-          this.data = e.data;        
+  getAllData(condition: Partial<ApplyDataQueryCondition>) {
+    return this.http.get<ApplyDataResponse>('/expense/apply', { params: condition }).pipe(
+      tap((e) => {
+        this.data = e.data.expenses;
       }),
-      delay(400)
+      delay(100)
     );
     // return of({ code: 200, msg: '', data: APPLY_DATA }).pipe(
     //   delay(300),

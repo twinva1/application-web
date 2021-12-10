@@ -1,6 +1,6 @@
 <div class="apply inner-card mat-elevation-z3">
   <header class="apply-header">
-    <h2>Expense List</h2>    
+    <h2>Expense List</h2>
   </header>
 
   <section class="apply-form">
@@ -54,7 +54,6 @@
   </section>
 
   <section class="apply-table">
-    <!-- <perfect-scrollbar class="pscrollbar" style="height: 440px"> -->
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -131,11 +130,11 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
     <mat-paginator
+      [length]="totalLength"
       [pageIndex]="defaultPaginationConf.index"
-      [pageSize]="defaultPaginationConf.size"
-      (page)="onPageChange($event)"
+      [pageSize]="defaultPaginationConf.size"      
+      showFirstLastButtons
     ></mat-paginator>
-    <!-- </perfect-scrollbar> -->
   </section>
 
   <app-loading [visible]="loading"></app-loading>

@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import { formatDate } from '@angular/common';
 //
 import { AccountService, ApplyDataService } from 'app/service';
 import {
@@ -12,24 +13,26 @@ import {
   ExpenseType,
   RequestBadgeStatus,
 } from 'app/util/constants';
-import { ApplyData } from 'app/util/type';
+import { ApplyTableData } from 'app/util/type';
 
 @Component({
   selector: 'app-apply-list',
   templateUrl: './apply-list.component.html',
   styleUrls: ['./apply-list.component.scss'],
 })
-export class ApplyListComponent implements OnInit, AfterViewInit { 
+export class ApplyListComponent implements OnInit {
   form!: FormGroup;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  totalLength = 10;
   defaultPaginationConf = {
     index: 0,
     size: 10,
   };
+
   expenseTypeOption = expenseOption;
   requestStatusOption = requestStatusOption;
   displayedColumns = ['id', 'type', 'status', 'amount', 'createTime', 'actions'];
-  dataSource = new MatTableDataSource<Partial<ApplyData> & { [key: string]: any }>([]);
+  dataSource = new MatTableDataSource<ApplyTableData>([]);
 
   loading = false;
 
@@ -37,10 +40,10 @@ export class ApplyListComponent implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder,
     private applyDataService: ApplyDataService,
     private router: Router,
-    public accountService: AccountService,
+    public accountService: AccountService
   ) {}
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     const todayAddSevenDay = new Date();
     todayAddSevenDay.setDate(todayAddSevenDay.getDate() + 7);
     const todayMinusSevenDay = new Date();
@@ -49,7 +52,7 @@ export class ApplyListComponent implements OnInit, AfterViewInit {
     this.form = this.formBuilder.group({
       type: '',
       status: '',
-      reason: '',
+      // reason: '',
       startTime: '',
       endTime: '',
       // startTime: todayMinusSevenDay,
@@ -60,38 +63,49 @@ export class ApplyListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.paginator.page.subscribe((page: PageEvent) => {
+      this.getApplyData(page.pageIndex, page.pageSize);
+    });
   }
 
-  getApplyData() {
+  getApplyData(page = 0, pageSize = 10) {
     this.loading = true;
-    this.applyDataService.getAllData().subscribe((res) => {
+    const condition = this.form.value;
+    Object.keys(condition).forEach((e) => {
+      if (!condition[e]) delete condition[e];
+    });
+    if (condition.startTime)
+      condition.startTime = formatDate(condition.startTime, 'yyyy-MM-dd', 'en-US');
+    if (condition.endTime)
+      condition.endTime = formatDate(condition.endTime, 'yyyy-MM-dd', 'en-US');
+    console.log('condition', condition);
+    this.applyDataService.getAllData({ page, pageSize, ...condition }).subscribe((res) => {
       this.loading = false;
-      const condition = this.form.value;
-      let filterData = res.data;      
-      Object.keys(condition).forEach((e) => {
-        if (!e && typeof e !== 'number') delete condition[e];
-      });
-      if (Object.keys(condition).length) {
-        filterData = filterData.filter((e) => {
-          if (typeof condition.type === 'number' && e.type !== condition.type) {
-            return false;
-          }
-          if (typeof condition.status === 'number' && e.status !== condition.status) {
-            return false;
-          }
-          if (condition.startTime && condition.endTime) {
-            const { startTime, endTime } = condition;
-            const sDate = new Date(startTime <= endTime ? startTime : endTime);
-            const eDate = new Date(startTime <= endTime ? endTime : startTime);
-            const createTime = new Date(e.createTime);
-            if (createTime < sDate || createTime > eDate) return false;
-          }
-          return true;
-        });
-      }
+      let filterData = res.data.expenses;
+      this.totalLength = res.data.totalElements;
+      // Object.keys(condition).forEach((e) => {
+      //   if (!condition[e] && typeof condition[e] !== 'number') delete condition[e];
+      // });
+      // if (Object.keys(condition).length) {
+      //   filterData = filterData.filter((e) => {
+      //     if (typeof condition.type === 'number' && e.type !== condition.type) {
+      //       return false;
+      //     }
+      //     if (typeof condition.status === 'number' && e.status !== condition.status) {
+      //       return false;
+      //     }
+      //     if (condition.startTime && condition.endTime) {
+      //       const { startTime, endTime } = condition;
+      //       const sDate = new Date(startTime <= endTime ? startTime : endTime);
+      //       const eDate = new Date(startTime <= endTime ? endTime : startTime);
+      //       const createTime = new Date(e.createTime);
+      //       if (createTime < sDate || createTime > eDate) return false;
+      //     }
+      //     return true;
+      //   });
+      // }
 
-      this.dataSource = new MatTableDataSource<{ [key: string]: any }>(
+      this.dataSource = new MatTableDataSource<ApplyTableData>(
         filterData.map((e) => ({
           ...e,
           statusDisplayName: RequestStatus[e.status],
@@ -99,12 +113,11 @@ export class ApplyListComponent implements OnInit, AfterViewInit {
           type: ExpenseType[e.type],
         }))
       );
-      this.dataSource.paginator = this.paginator;
+      // this.dataSource.paginator = this.paginator;
     });
   }
 
   handleSearch() {
-    // console.log('search param', this.form.value);
     this.getApplyData();
   }
 
@@ -126,11 +139,5 @@ export class ApplyListComponent implements OnInit, AfterViewInit {
       .subscribe(() => {
         this.handleSearch();
       });
-  }
-
-  onPageChange(pageEvent: PageEvent) {
-    // TODO: integrate with backend pagination parameters
-    // console.log(pageEvent);
-    console.log(this.paginator);
   }
 }
