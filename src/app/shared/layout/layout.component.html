@@ -18,7 +18,23 @@
       [mode]="isSmallDevice ? 'over' : 'side'"
       [(opened)]="drawerOpened"
     >
-      <span>TODO: Menu Here</span>
+      <mat-nav-list class="layout-sidebar-navlist">
+        <h3 mat-subheader>Demo Pages</h3>
+        <a mat-list-item [routerLink]="'/apply'" [routerLinkActive]="'active-route'">
+          <mat-icon>article</mat-icon>
+          <span>Expense Managemnet</span>
+        </a>
+        <a mat-list-item [routerLink]="'/user'" [routerLinkActive]="'active-route'">
+          <mat-icon>people</mat-icon>
+          <span>User Management</span>
+        </a>
+        <mat-divider></mat-divider>
+        <h3 mat-subheader>Other Pages</h3>
+        <a mat-list-item *ngFor="let p of fakePages; let index = index">
+          <mat-icon>bookmark</mat-icon>
+          <span>Fake Page {{ index + 1 }}</span>
+        </a>
+      </mat-nav-list>
     </mat-drawer>
     <div class="layout-content">
       <router-outlet></router-outlet>

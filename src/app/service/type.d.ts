@@ -6,6 +6,16 @@ export interface ApiResponse<T = null> {
   data: T;
 }
 
-export type LoginResponse = ApiResponse<{ id: number; account: string; name: string; role_id: number }>;
+export type LoginResponse = ApiResponse<{
+  id: number;
+  account: string;
+  name: string;
+  role_id: number;
+}>;
 
-export type ApplyDataResponse = ApiResponse<ApplyData[]>
+export type ApplyDataResponse = ApiResponse<ApplyData[]>;
+// {
+//   totalElements: number;
+//   totalPages: number;
+//   expenses: ApplyData[];
+// }

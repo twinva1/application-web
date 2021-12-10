@@ -14,6 +14,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
   isSmallDevice = window.matchMedia('(max-width: 900px)').matches;
   drawerOpened = true;
 
+  fakePages = Array.from({ length: 5 });
+
   constructor(private accountService: AccountService) {}
 
   ngOnInit(): void {

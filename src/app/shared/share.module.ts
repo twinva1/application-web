@@ -18,6 +18,7 @@ import {
 } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
+import { MatListModule } from '@angular/material/list';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -61,6 +62,7 @@ const MODULES = [
   PerfectScrollbarModule,
   ReactiveFormsModule,
   RouterModule,
+  MatListModule,
 ];
 @NgModule({
   imports: [...MODULES],

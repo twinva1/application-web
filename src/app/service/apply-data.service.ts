@@ -163,12 +163,8 @@ export class ApplyDataService {
 
   getAllData(condition: Partial<ApplyData> | null = null) {
     return this.http.get<ApplyDataResponse>('/expense/apply').pipe(
-      tap((e) => {
-        if (typeof e.data === 'string') {
-          this.data = JSON.parse(e.data);
-        } else {
-          this.data = e.data;
-        }
+      tap((e) => {        
+          this.data = e.data;        
       }),
       delay(400)
     );

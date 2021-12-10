@@ -68,10 +68,7 @@ export class ApplyListComponent implements OnInit, AfterViewInit {
     this.applyDataService.getAllData().subscribe((res) => {
       this.loading = false;
       const condition = this.form.value;
-      let filterData = res.data;
-      if(typeof res.data === 'string') {
-        filterData = JSON.parse(res.data);
-      }
+      let filterData = res.data;      
       Object.keys(condition).forEach((e) => {
         if (!e && typeof e !== 'number') delete condition[e];
       });

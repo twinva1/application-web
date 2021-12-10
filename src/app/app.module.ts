@@ -10,9 +10,10 @@ import { LoginComponent } from './page/login/login.component';
 import { AuthGuard } from './util/auth.guard';
 import { AppRequestInteceptor, AppResponseInteceptor } from 'app/util/http-interceptor';
 import { FakeBackendInteceptor } from './util/fake-backend';
+import { UserComponent } from './page/user/user.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent, LoginComponent, UserComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -13,14 +13,14 @@
     </div>
   </div>
   <div class="viewform-control">
-    <div *ngIf="type === 'approve'">
+    <ng-container *ngIf="type === 'approve'">
       <button mat-raised-button color="primary" (click)="changeStatus('approve')">
         Approve
       </button>
       <button mat-raised-button color="primary" (click)="changeStatus('reject')">
         Reject
       </button>
-    </div>
+    </ng-container>
     <button mat-raised-button (click)="handleBack()">Back</button>
   </div>
   <app-loading [visible]="loading"></app-loading>
