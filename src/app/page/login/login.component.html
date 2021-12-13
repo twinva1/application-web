@@ -6,17 +6,27 @@
     <div class="form-item">
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>Account</mat-label>
-        <input matInput placeholder="Please enter account" formControlName="account" required />
-        <mat-error *ngIf="account.errors && account.errors['required']">Account is required</mat-error>
-        <mat-error *ngIf="account.errors && account.errors['pattern']">must be at least 3 characters long</mat-error>
+        <input matInput placeholder="Please enter account" formControlName="account" />
+
+        <mat-error *ngIf="account.errors?.['required']">Account is required</mat-error>
+        <mat-error *ngIf="account.errors?.['pattern']"
+          >must be at least 3 characters long</mat-error
+        >
       </mat-form-field>
     </div>
     <div class="form-item">
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>Password</mat-label>
-        <input matInput placeholder="Please enter password" formControlName="password" required type="password" />
-        <mat-error *ngIf="password.errors && password.errors['required']">Password is required</mat-error>
-        <mat-error *ngIf="password.errors && password.errors['pattern']">must be at least 3 characters long</mat-error>
+        <input
+          matInput
+          placeholder="Please enter password"
+          formControlName="password"
+          type="password"
+        />
+        <mat-error *ngIf="password.errors?.['required']">Password is required</mat-error>
+        <mat-error *ngIf="password.errors?.['pattern']"
+          >must be at least 3 characters long</mat-error
+        >
       </mat-form-field>
     </div>
     <button class="login-btn" mat-raised-button color="primary" type="submit" [disabled]="loading">
@@ -28,4 +38,5 @@
       </div>
     </button>
   </form>
+  <ng-particles [options]="particlesOptions"></ng-particles>
 </div>

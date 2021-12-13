@@ -26,6 +26,7 @@ export class AccountService {
 
   login(account: string, password: string) {
     return this.http.post<LoginResponse>('/user/login', { account, password }).pipe(
+      delay(600),
       tap((res) => {
         if (!res.data) return;
         const userInfo = res.data;

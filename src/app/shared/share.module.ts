@@ -11,13 +11,11 @@ import { MatNativeDateModule, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {
-  MatSnackBarModule,
-  MAT_SNACK_BAR_DEFAULT_OPTIONS,  
-} from '@angular/material/snack-bar';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
+import { NgParticlesModule } from 'ng-particles';
 //
 import { NumberFormatPipe } from './pipe/number-format.pipe';
 import { BadgeComponent } from './components/badge/badge.component';
@@ -39,7 +37,7 @@ export const TW_FORMATS = {
 };
 
 const MODULES = [
-  CommonModule ,
+  CommonModule,
   MatButtonModule,
   MatProgressSpinnerModule,
   MatInputModule,
@@ -56,6 +54,7 @@ const MODULES = [
   ReactiveFormsModule,
   RouterModule,
   MatListModule,
+  NgParticlesModule,
 ];
 @NgModule({
   imports: [...MODULES],

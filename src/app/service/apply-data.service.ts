@@ -166,7 +166,7 @@ export class ApplyDataService {
       tap((e) => {
         this.data = e.data.expenses;
       }),
-      delay(100)
+      delay(200)
     );
     // return of({ code: 200, msg: '', data: APPLY_DATA }).pipe(
     //   delay(300),

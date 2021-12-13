@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 //
 import { AccountService } from 'app/service';
 import { fadeInAnimation } from 'app/util/animation';
+import { particleOptions } from 'app/util/constants';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,8 @@ export class LoginComponent implements OnInit {
   form!: FormGroup;
 
   loading = false;
+
+  particlesOptions = particleOptions;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,8 +35,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      account: ['', Validators.pattern('^[a-zA-Z0-9-_]{3,20}')],
-      password: ['', Validators.pattern('^[a-zA-Z0-9-_]{3,20}')],
+      account: ['', [Validators.pattern('^[a-zA-Z0-9-_]{3,20}'), Validators.required]],
+      password: ['', [Validators.pattern('^[a-zA-Z0-9-_]{3,20}'), Validators.required]],
     });
   }
 
