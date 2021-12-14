@@ -17,7 +17,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   constructor(private accountService: AccountService) {
     fromEvent(window, 'resize')
-      .pipe(throttleTime(300))
+      .pipe(throttleTime(200))
       .subscribe(() => {
         this.deviceDetect();
       });
