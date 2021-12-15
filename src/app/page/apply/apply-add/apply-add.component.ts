@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  Form,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApplyDataService } from 'app/service';
 import { ExpenseType } from 'app/util/constants';
@@ -16,6 +23,8 @@ export class ApplyAddComponent implements OnInit {
     { viewValue: 'Group Meal', value: ExpenseType['Group Meal'] },
   ];
 
+  maxAmount = 5000;
+
   loading = false;
 
   constructor(
@@ -27,22 +36,45 @@ export class ApplyAddComponent implements OnInit {
   ngOnInit(): void {
     const tommorrow = new Date();
     tommorrow.setDate(tommorrow.getDate() + 1);
-    this.form = this.formBuilder.group({
-      type: ExpenseType.Traveling,
-      startTime: new Date(),
-      amount: 1000,
-      endTime: tommorrow,
-      reason: 'Example expense reason ...\nExample expense reason ...\n',
-    });
+    this.form = this.formBuilder.group(
+      {
+        type: ExpenseType.Traveling,
+        startTime: new Date(),
+        amount: [1000],
+        endTime: tommorrow,
+        reason: '',
+      },
+      { validators: this.amountValidator }
+    );
   }
+
+  get amount() {
+    return this.form.get('amount');
+  }
+
+  amountValidator: ValidatorFn = (control): ValidationErrors | null => {
+    const type = control.get('type');
+    const amount = control.get('amount');
+    amount?.setErrors(null);
+    if (type?.value === ExpenseType.Traveling && amount?.value > 5000) {
+      this.maxAmount = 5000;
+      amount?.setErrors({ max: true });
+    }
+    if (type?.value === ExpenseType['Group Meal'] && amount?.value > 2000) {
+      this.maxAmount = 2000;
+      amount?.setErrors({ max: true });
+    }
+    return null;    
+  };
 
   handleCancel() {
     this.router.navigate(['/apply']);
   }
 
-  handleApply() {
+  handleApply() {    
     console.log('apply data:', this.form.value);
-    this.loading = true
+    if (this.form.invalid) return;
+    this.loading = true;
     this.applyDataService
       .addData({
         ...this.form.value,

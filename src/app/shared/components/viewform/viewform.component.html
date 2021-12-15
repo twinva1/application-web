@@ -1,5 +1,5 @@
 <div class="viewform inner-card mat-elevation-z3">
-  <h2>Expense Detail</h2>
+  <h2>Detail of Expense</h2>
   <div class="form">
     <div class="form-item" *ngFor="let formitem of orderArray">
       <div class="form-item-label">{{ displayName[formitem] }} :</div>
@@ -9,6 +9,14 @@
             ? (dataSource[formitem] | date: 'yyyy-MM-dd')
             : (dataSource[formitem] | numberFormat)
         }}
+      </div>
+    </div>
+    <div class="form-item full-width">
+      <div class="form-item-label">Reason :</div>
+      <div class="form-item-value">
+        <mat-form-field appearance="outline">
+          <textarea matInput placeholder="Please enter reason if you want to reject"></textarea>
+        </mat-form-field>
       </div>
     </div>
   </div>

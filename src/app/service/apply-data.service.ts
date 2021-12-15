@@ -165,8 +165,7 @@ export class ApplyDataService {
     return this.http.get<ApplyDataResponse>('/expense/apply', { params: condition }).pipe(
       tap((e) => {
         this.data = e.data.expenses;
-      }),
-      delay(200)
+      }),      
     );
     // return of({ code: 200, msg: '', data: APPLY_DATA }).pipe(
     //   delay(300),

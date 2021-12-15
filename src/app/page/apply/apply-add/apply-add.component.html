@@ -32,6 +32,9 @@
             formControlName="amount"
             type="number"
           />
+          <mat-error *ngIf="amount?.errors?.['max']"
+            >must be less than or equal to {{ maxAmount }}</mat-error
+          >
         </mat-form-field>
       </div>
       <div class="form-item">
@@ -58,7 +61,13 @@
   </section>
   <section class="apply-add-control">
     <button mat-raised-button (click)="handleCancel()">Cancel</button>
-    <button class="confirm-btn" mat-raised-button color="primary" (click)="handleApply()">
+    <button
+      class="confirm-btn"
+      mat-raised-button
+      color="primary"
+      (click)="handleApply()"
+      [disabled]="amount?.errors?.['max']"
+    >
       Apply
     </button>
   </section>

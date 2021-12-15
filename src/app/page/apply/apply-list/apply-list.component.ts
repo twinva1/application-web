@@ -51,7 +51,7 @@ export class ApplyListComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       type: '',
-      status: '',
+      status: this.accountService.isAdmin ? RequestStatus.Submitted : '',
       // reason: '',
       startTime: '',
       endTime: '',
@@ -76,8 +76,7 @@ export class ApplyListComponent implements OnInit {
     });
     if (condition.startTime)
       condition.startTime = formatDate(condition.startTime, 'yyyy-MM-dd', 'en-US');
-    if (condition.endTime)
-      condition.endTime = formatDate(condition.endTime, 'yyyy-MM-dd', 'en-US');
+    if (condition.endTime) condition.endTime = formatDate(condition.endTime, 'yyyy-MM-dd', 'en-US');
     console.log('condition', condition);
     this.applyDataService.getAllData({ page, pageSize, ...condition }).subscribe((res) => {
       this.loading = false;

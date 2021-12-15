@@ -24,10 +24,13 @@
           // width: 50%;
           flex: 1;
         }
+        .mat-error {
+          padding-top: 15px;
+        }
         .mat-form-field-wrapper {
           // width: 65%;
           // margin: 0 auto;
-          padding-bottom: unset
+          padding-bottom: unset;
         }
       }
     }
