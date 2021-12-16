@@ -1,3 +1,5 @@
+@import 'style/_mixin.scss';
+
 .layout {
   &-header {
     position: fixed;
@@ -6,6 +8,9 @@
     &-username {
       font-size: 14px;
       margin-right: 5px;
+    }
+    .arrow-down-icon {      
+      @include md-icon-size(14px)
     }
   }
   &-container {

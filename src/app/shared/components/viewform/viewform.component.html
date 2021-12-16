@@ -6,26 +6,37 @@
       <div class="form-item-value">
         {{
           formitem === 'startTime' || formitem === 'endTime'
-            ? (dataSource[formitem] | date: 'yyyy-MM-dd')
+            ? (dataSource[formitem] | date: 'MM-dd-yyyy')
             : (dataSource[formitem] | numberFormat)
         }}
       </div>
     </div>
-    <div class="form-item full-width">
-      <div class="form-item-label">Reason :</div>
+    <div *ngIf="type === 'approve'" class="form-item full-width">
+      <div class="form-item-label">Comment :</div>
       <div class="form-item-value">
         <mat-form-field appearance="outline">
-          <textarea matInput placeholder="Please enter reason if you want to reject"></textarea>
+          <textarea
+            matInput
+            placeholder="Must enter a comment if you want to reject"
+            [(ngModel)]="commentVal"
+          ></textarea>
         </mat-form-field>
       </div>
     </div>
   </div>
   <div class="viewform-control">
-    <ng-container *ngIf="type === 'approve'">
-      <button mat-raised-button color="primary" (click)="changeStatus('approve')">Approve</button>
-      <button mat-raised-button color="primary" (click)="changeStatus('reject')">Reject</button>
-    </ng-container>
     <button mat-raised-button (click)="handleBack()">Back</button>
+    <ng-container *ngIf="type === 'approve'">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="changeStatus('reject')"
+        [disabled]="!commentVal"
+      >
+        Reject
+      </button>
+      <button mat-raised-button color="primary" (click)="changeStatus('approve')">Approve</button>
+    </ng-container>
   </div>
   <app-loading [visible]="loading"></app-loading>
 </div>

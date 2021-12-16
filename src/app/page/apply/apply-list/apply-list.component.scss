@@ -3,6 +3,7 @@
 .apply {
   position: relative;
   min-height: calc(100% - 40px);
+  border-radius: 20px;
   &-header {
     display: flex;
     justify-content: space-between;
@@ -19,10 +20,26 @@
       flex-wrap: wrap;
       // justify-content: flex-start;
       width: 100%;
-      & > mat-form-field {
+      mat-form-field {
         width: 24%;
         &:not(:nth-child(4n)) {
           margin-right: calc(4% / 3);
+        }
+      }
+      @media (max-width: 900px) {
+        mat-form-field {
+          width: 48%;
+          &:not(:nth-child(2n)) {
+            margin-right: 2%;
+          }
+        }
+      }
+      @media (max-width: 768px) {
+        mat-form-field {
+          width: 100%;
+          &:not(:nth-child(4n)) {
+            margin-right: unset;
+          }
         }
       }
     }
@@ -42,37 +59,48 @@
     }
   }
   &-table {
-    margin-top: 20px;        
+    margin-top: 20px;
     table {
       width: 100%;
     }
-    ::ng-deep {
-      .ps__rail-y {
-        opacity: unset;
-        z-index: 500;
+    // ::ng-deep {
+    //   .ps__rail-y {
+    //     opacity: unset;
+    //     z-index: 500;
+    //   }
+    // }
+    @media (max-width: 599px) {
+      overflow-x: scroll;
+      table {
+        width: 200%;
       }
     }
-    
   }
 
-  .loading-mask {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background-color: rgba(17, 17, 17, 0.1);
-    border-radius: inherit;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.4s;
-    &.show {
-      visibility: visible;
-      opacity: 1;
+  ::ng-deep {
+    .mat-paginator-range-label {
+      margin: 0 10px 0 0;
     }
   }
+
+  // .loading-mask {
+  //   position: absolute;
+  //   top: 0;
+  //   bottom: 0;
+  //   left: 0;
+  //   right: 0;
+  //   z-index: 10;
+  //   background-color: rgba(17, 17, 17, 0.1);
+  //   border-radius: inherit;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   visibility: hidden;
+  //   opacity: 0;
+  //   transition: all 0.4s;
+  //   &.show {
+  //     visibility: visible;
+  //     opacity: 1;
+  //   }
+  // }
 }

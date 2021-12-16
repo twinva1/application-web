@@ -45,6 +45,8 @@ export class ViewFormComponent implements OnInit {
     'reason',
   ];
 
+  commentVal = ''
+
   loading = false;
 
   constructor(private route: Router, private applyDataService: ApplyDataService) {}

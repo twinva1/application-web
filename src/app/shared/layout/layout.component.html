@@ -5,11 +5,15 @@
     </button>
     <span>MALBEK</span>
     <div class="flex-spacer"></div>
-    <span class="layout-header-username">{{ userInfo?.name }}</span>
-    <mat-icon>person</mat-icon>
-    <button style="margin-left: 10px" mat-raised-button (click)="handleLogout()" color="primary">
-      Logout
+    <button mat-button [matMenuTriggerFor]="menu">
+      <span class="layout-header-username">{{ userInfo?.name }}</span>
+      <mat-icon>person</mat-icon>
+      <mat-icon class="arrow-down-icon">keyboard_arrow_down</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item (click)="handleLogout()">Logout</button>
+    </mat-menu>
   </mat-toolbar>
   <mat-drawer-container class="layout-container">
     <mat-drawer
@@ -38,6 +42,7 @@
     </mat-drawer>
     <div class="layout-content">
       <router-outlet></router-outlet>
+      <div style="height: 15px; width: 100%"></div>
     </div>
   </mat-drawer-container>
 </div>
