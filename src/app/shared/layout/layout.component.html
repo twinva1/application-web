@@ -10,7 +10,7 @@
       <mat-icon>person</mat-icon>
       <mat-icon class="arrow-down-icon">keyboard_arrow_down</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">      
+    <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="handleLogout()">Logout</button>
     </mat-menu>
   </mat-toolbar>
@@ -27,7 +27,12 @@
           <mat-icon>article</mat-icon>
           <span>Expense Managemnet</span>
         </a>
-        <a mat-list-item [routerLink]="'/user'" [routerLinkActive]="'active-route'">
+        <a
+          *ngIf="accountService.isAdmin"
+          mat-list-item
+          [routerLink]="'/user'"
+          [routerLinkActive]="'active-route'"
+        >
           <mat-icon>people</mat-icon>
           <span>User Management</span>
         </a>

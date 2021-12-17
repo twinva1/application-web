@@ -165,7 +165,7 @@ export class ApplyDataService {
     return this.http.get<ApplyDataResponse>('/expense/apply', { params: condition }).pipe(
       tap((e) => {
         this.data = e.data.expenses;
-      }),      
+      })
     );
     // return of({ code: 200, msg: '', data: APPLY_DATA }).pipe(
     //   delay(300),
@@ -175,13 +175,14 @@ export class ApplyDataService {
     // );
   }
 
-  setStatus({ id, status }: { id: number; status: number }) {
+  setStatus({ id, status, adminReason }: { id: number; status: number; adminReason?: string }) {
     // const target = this.data.find((e) => e.id === id);
     // if (target) target.status = status;
     // return of({});
     return this.http.patch(`/expense/apply/${id}`, {
       approveId: this.accountService.userInfo.getValue()?.id,
       status,
+      ...(adminReason && { adminReason }),
     });
   }
 

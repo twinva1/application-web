@@ -26,4 +26,5 @@ export type ApplyDataQueryCondition = {
   endTime: number;
   page: number;
   pageSize: number;
+  userId: number;
 };

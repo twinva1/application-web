@@ -45,7 +45,7 @@ export class ViewFormComponent implements OnInit {
     'reason',
   ];
 
-  commentVal = ''
+  commentVal = '';
 
   loading = false;
 
@@ -59,6 +59,7 @@ export class ViewFormComponent implements OnInit {
       .setStatus({
         id: this.dataSource.id,
         status: status === 'approve' ? RequestStatus.Approved : RequestStatus.Rejected,
+        ...(this.commentVal && { adminReason: this.commentVal }),
       })
       .subscribe(() => {
         this.loading = false;

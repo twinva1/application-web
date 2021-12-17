@@ -78,42 +78,49 @@ export class ApplyListComponent implements OnInit {
       condition.startTime = formatDate(condition.startTime, 'yyyy-MM-dd', 'en-US');
     if (condition.endTime) condition.endTime = formatDate(condition.endTime, 'yyyy-MM-dd', 'en-US');
     console.log('condition', condition);
-    this.applyDataService.getAllData({ page, pageSize, ...condition }).subscribe((res) => {
-      this.loading = false;
-      let filterData = res.data.expenses;
-      this.totalLength = res.data.totalElements;
-      // Object.keys(condition).forEach((e) => {
-      //   if (!condition[e] && typeof condition[e] !== 'number') delete condition[e];
-      // });
-      // if (Object.keys(condition).length) {
-      //   filterData = filterData.filter((e) => {
-      //     if (typeof condition.type === 'number' && e.type !== condition.type) {
-      //       return false;
-      //     }
-      //     if (typeof condition.status === 'number' && e.status !== condition.status) {
-      //       return false;
-      //     }
-      //     if (condition.startTime && condition.endTime) {
-      //       const { startTime, endTime } = condition;
-      //       const sDate = new Date(startTime <= endTime ? startTime : endTime);
-      //       const eDate = new Date(startTime <= endTime ? endTime : startTime);
-      //       const createTime = new Date(e.createTime);
-      //       if (createTime < sDate || createTime > eDate) return false;
-      //     }
-      //     return true;
-      //   });
-      // }
+    this.applyDataService
+      .getAllData({
+        page,
+        pageSize,
+        userId: this.accountService.userInfo.getValue()?.id,
+        ...condition,
+      })
+      .subscribe((res) => {
+        this.loading = false;
+        let filterData = res.data.expenses;
+        this.totalLength = res.data.totalElements;
+        // Object.keys(condition).forEach((e) => {
+        //   if (!condition[e] && typeof condition[e] !== 'number') delete condition[e];
+        // });
+        // if (Object.keys(condition).length) {
+        //   filterData = filterData.filter((e) => {
+        //     if (typeof condition.type === 'number' && e.type !== condition.type) {
+        //       return false;
+        //     }
+        //     if (typeof condition.status === 'number' && e.status !== condition.status) {
+        //       return false;
+        //     }
+        //     if (condition.startTime && condition.endTime) {
+        //       const { startTime, endTime } = condition;
+        //       const sDate = new Date(startTime <= endTime ? startTime : endTime);
+        //       const eDate = new Date(startTime <= endTime ? endTime : startTime);
+        //       const createTime = new Date(e.createTime);
+        //       if (createTime < sDate || createTime > eDate) return false;
+        //     }
+        //     return true;
+        //   });
+        // }
 
-      this.dataSource = new MatTableDataSource<ApplyTableData>(
-        filterData.map((e) => ({
-          ...e,
-          statusDisplayName: RequestStatus[e.status],
-          statusBadge: RequestBadgeStatus[e.status],
-          type: ExpenseType[e.type],
-        }))
-      );
-      // this.dataSource.paginator = this.paginator;
-    });
+        this.dataSource = new MatTableDataSource<ApplyTableData>(
+          filterData.map((e) => ({
+            ...e,
+            statusDisplayName: RequestStatus[e.status],
+            statusBadge: RequestBadgeStatus[e.status],
+            type: ExpenseType[e.type],
+          }))
+        );
+        // this.dataSource.paginator = this.paginator;
+      });
   }
 
   handleSearch() {

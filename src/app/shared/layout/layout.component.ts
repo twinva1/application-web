@@ -15,7 +15,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   fakePages = Array.from({ length: 5 });
 
-  constructor(private accountService: AccountService) {
+  constructor(public accountService: AccountService) {
     fromEvent(window, 'resize')
       .pipe(throttleTime(200))
       .subscribe(() => {
