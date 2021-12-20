@@ -6,8 +6,7 @@
     <div class="form-item">
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>Account</mat-label>
-        <input matInput placeholder="Please enter account" formControlName="account" />
-
+        <input id="account" matInput placeholder="Please enter account" formControlName="account" />
         <mat-error *ngIf="account.errors?.['required']">Account is required</mat-error>
         <mat-error *ngIf="account.errors?.['pattern']"
           >must be at least 3 characters long</mat-error
@@ -18,6 +17,7 @@
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>Password</mat-label>
         <input
+          id="password"
           matInput
           placeholder="Please enter password"
           formControlName="password"
