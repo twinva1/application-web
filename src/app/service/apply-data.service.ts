@@ -180,7 +180,7 @@ export class ApplyDataService {
     // if (target) target.status = status;
     // return of({});
     return this.http.patch(`/expense/apply/${id}`, {
-      approveId: this.accountService.userInfo.getValue()?.id,
+      approverId: this.accountService.userInfo.getValue()?.id,
       status,
       ...(adminReason && { adminReason }),
     });
