@@ -1,3 +1,4 @@
+# -- UI build start --
 FROM node:14.19.1-alpine as NODE
 WORKDIR /app
 
@@ -7,8 +8,10 @@ RUN npm ci
 
 COPY . .
 RUN npm run build
+# -- UI build end--
 
 
+# deploy with nginx
 FROM nginx:alpine
 COPY ./nginx.conf ./etc/nginx/conf.d/default.conf
 COPY --from=NODE /app/dist/application-web /usr/share/nginx/html
