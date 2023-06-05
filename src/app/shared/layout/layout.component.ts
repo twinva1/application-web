@@ -13,7 +13,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   isSmallDevice = window.matchMedia('(max-width: 900px)').matches;
   drawerOpened = !window.matchMedia('(max-width: 900px)').matches;
 
-  fakePages = Array.from({ length: 5 });
+  fakePages = Array.from({ length: 1 });
 
   constructor(public accountService: AccountService) {
     fromEvent(window, 'resize')
