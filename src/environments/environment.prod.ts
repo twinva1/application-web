@@ -1,6 +1,6 @@
 export const environment: EnvType = {
   production: true,
   name: 'production',  
-  expenseBaseUrl: 'http://localhost/expense',
-  userBaseUrl: 'http://localhost/user',
+  expenseBaseUrl: `http://${location.host}/expense`,
+  userBaseUrl: `http://${location.host}/user`,
 };
